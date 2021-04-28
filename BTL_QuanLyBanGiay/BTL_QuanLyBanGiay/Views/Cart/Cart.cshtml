@@ -1,0 +1,17 @@
+﻿
+@{
+    Layout = null;
+    
+}
+@model BTL_QuanLyBanGiay.Models.SanPham
+
+<div class="imgSingle">
+    <img src="@Url.Content("~/images/"+Html.DisplayFor(model=>model.Anh))" style="width:100px;height:100px" />
+</div>
+<div class="infoSingle">
+    <h4>@Html.DisplayFor(model => model.TenSP)</h4>
+    <h6>@string.Format("{0:0,00}",(Double.Parse(Html.DisplayFor(model => model.DonGiaBan).ToString()))) đ</h6>
+    <h6>Màu: @Html.DisplayFor(model => model.Mau.TenMau)</h6>
+    <h6>Size: @Html.DisplayFor(model => model.Co.TenCo)</h6>
+</div>                   
+               

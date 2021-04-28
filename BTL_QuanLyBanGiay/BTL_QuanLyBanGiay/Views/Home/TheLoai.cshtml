@@ -1,0 +1,7 @@
+﻿@model List<BTL_QuanLyBanGiay.Models.TheLoai>
+    @foreach (var item in Model)
+    {
+                <li>
+                    <a href="@Url.Action("Shop", "Home", new {MaLoai=item.MaLoai })" style="color:black;">@item.TenLoai</a>
+                </li>
+            }

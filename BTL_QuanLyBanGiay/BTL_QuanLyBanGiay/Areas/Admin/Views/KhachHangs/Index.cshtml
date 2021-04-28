@@ -1,0 +1,68 @@
+﻿@using BTL_QuanLyBanGiay.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<KhachHang>
+
+@{
+    ViewBag.active = 1;
+    ViewBag.Title = "Customers";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="~/Assest/admin/css/table-admin.css" rel="stylesheet" />
+<p>
+    <a href="@Url.Action("Create","KhachHangs")" class="btn btn-default"><i class="fa fa-plus"></i>Create</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Mã
+            </th>
+            <th>
+                Họ và tên
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaKhach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenKhach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DienThoai)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit","KhachHangs",new { id=item.MaKhach})"><i class="fa fa-edit"></i></a>
+                    <a href="@Url.Action("Delete","KhachHangs",new { id=item.MaKhach})"><i class="fa fa-trash-o"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.PageCount > 1)
+{
+    <div class="menuPage">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+}
+

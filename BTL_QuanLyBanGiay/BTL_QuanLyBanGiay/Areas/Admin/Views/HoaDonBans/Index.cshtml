@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BTL_QuanLyBanGiay.Models.HoaDonBan>
+
+@{
+    ViewBag.active = 4;
+    ViewBag.Title = "Sell";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="~/Assest/admin/css/table-admin.css" rel="stylesheet" />
+<p>
+    <a href="@Url.Action("Create","HoaDonBans")" class="btn btn-default"><i class="fa fa-plus"></i>Create</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Số hóa đơn
+            </th>
+            <th>
+                Ngày bán
+            </th>
+            <th>
+                Khách hàng
+            </th>
+            <th>
+                Tổng tiền
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoHDB)
+        </td>
+        <td>
+            @string.Format("{0:dd/MM/yyyy}",item.NgayBan)
+            @*@Html.DisplayFor(modelItem => item.NgayBan)*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhachHang.TenKhach)           
+        </td>
+        <td>
+            @string.Format("{0:0,00}",item.TongTien) đ
+        </td>
+        <td>
+            <a href="@Url.Action("Edit","HoaDonBans",new { id=item.SoHDB})"><i class="fa fa-edit"></i></a>
+            <a href="@Url.Action("Details","HoaDonBans",new { id=item.SoHDB})"><i class="fa fa-info-circle"></i></a>
+            <a href="@Url.Action("Delete","HoaDonBans",new { id=item.SoHDB})"><i class="fa fa-trash-o"></i></a>
+        </td>
+    </tr>
+}
+
+</table>

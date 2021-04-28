@@ -1,0 +1,72 @@
+﻿@model BTL_QuanLyBanGiay.Models.NhanVien
+
+@{
+    ViewBag.active = 1;
+    ViewBag.Title = "Thông tin nhân viên";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Mã
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaNV)
+        </dd>
+        <dt>
+            Họ và tên
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNV)
+        </dd>
+
+        <dt>
+            Giới tính
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiTinh)
+        </dd>
+
+        <dt>
+            Ngày sinh
+        </dt>
+
+        <dd>
+            @string.Format("{0:dd/MM/yyyy}", Model.NgaySinh)
+            @*@Html.DisplayFor(model => model.NgaySinh)*@
+        </dd>
+
+        <dt>
+            Số điện thoại
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoai)
+        </dd>
+
+        <dt>
+            Địa chỉ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            Công việc
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongViec.TenCV)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Index","NhanViens")" class="btn btn-default"><i class="fa fa-arrow-left"></i>Back</a>
+    @Html.ActionLink("Edit", "Edit", new { MaNV = Model.MaNV })
+</p>

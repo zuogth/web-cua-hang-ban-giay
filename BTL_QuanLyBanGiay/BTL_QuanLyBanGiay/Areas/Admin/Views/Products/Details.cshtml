@@ -1,0 +1,30 @@
+﻿@model BTL_QuanLyBanGiay.Models.SanPham
+
+@{
+    ViewBag.active = 0;
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="~/Assest/admin/css/single.css" rel="stylesheet" />
+<div class="single">
+    <div id="img">
+        <img src="@Url.Content("~/images/"+Html.DisplayFor(model => model.Anh))" alt="image">
+    </div>
+    <div id="thongtin">
+        <h4>Mã sản phẩm: @Html.DisplayFor(model => model.MaSP)</h4>
+        <p>Tên sản phẩm: @Html.DisplayFor(model => model.TenSP)</p>
+        <p>Giá nhập: <span>@Html.DisplayFor(model => model.DonGiaNhap) VNĐ</span></p>
+        <p>Giá bán: <span>@Html.DisplayFor(model => model.DonGiaBan) VNĐ</span></p>
+        <p>Số lượng: @Html.DisplayFor(model => model.SoLuong)</p>
+        <p>Chất liệu: @Html.DisplayFor(model => model.ChatLieu.TenChatLieu)</p>
+        <p>Màu: @Html.DisplayFor(model => model.Mau.TenMau)</p>
+        <p>Cỡ: @Html.DisplayFor(model => model.Co.TenCo)</p>
+        <p>Đối tượng: @Html.DisplayFor(model => model.DoiTuong.TenDoiTuong)</p>
+        <p>Nước SX: @Html.DisplayFor(model => model.NuocSanXuat.TenNuocSX)</p>
+        <p>Thể loại: @Html.DisplayFor(model => model.TheLoai.TenLoai)</p>
+    </div>
+</div>
+<p>
+    <a href="@Url.Action("Products","Products")" class="btn btn-default"><i class="fa fa-arrow-left"></i>Back</a>
+    @Html.ActionLink("Edit", "Edit", new { MaSP = Model.MaSP })
+</p>

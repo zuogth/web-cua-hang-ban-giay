@@ -1,0 +1,11 @@
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\bin\Debug\ModelWeb.dll.config
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\bin\Debug\ModelWeb.dll
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\bin\Debug\ModelWeb.pdb
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\bin\Debug\EntityFramework.dll
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\bin\Debug\EntityFramework.SqlServer.dll
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\bin\Debug\EntityFramework.xml
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\bin\Debug\EntityFramework.SqlServer.xml
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\obj\Debug\ModelWeb.csproj.CoreCompileInputs.cache
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\obj\Debug\ModelWeb.csproj.CopyComplete
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\obj\Debug\ModelWeb.dll
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\obj\Debug\ModelWeb.pdb

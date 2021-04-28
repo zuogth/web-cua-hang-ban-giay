@@ -1,0 +1,142 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-image: url('../../layout/images/computer-1867758_1920-min.jpg');
+}
+
+.container {
+    width: 50%;
+    margin: auto;
+    box-shadow: 0 0 3px;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: aliceblue;
+}
+
+.loginWith {
+    width: 40%;
+    text-align: center;
+    background-color: rgba(38,43,72,.92);
+    padding: 100px 0px;
+}
+
+    .loginWith h5 {
+        color: #fff;
+        margin: 10px;
+    }
+
+    .loginWith .img img {
+        width: 50%;
+    }
+
+.btnFace, .btnTwitter, .btnGoogle {
+    width: 80%;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 3px;
+    border: 0;
+    color: #fff;
+    padding: 10px;
+}
+
+.btnFace {
+    background-color: #3b5998;
+}
+
+.btnTwitter {
+    background-color: #00aced;
+}
+
+.btnGoogle {
+    background-color: #c32f10;
+}
+
+.login-register {
+    width: 60%;
+    text-align: center;
+    position: relative;
+}
+
+.login {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+    .login h2 {
+        margin: 20px;
+    }
+
+    .login .input {
+        padding: 10px;
+    }
+
+        .login .input input {
+            padding: 15px;
+            width: 80%;
+            box-shadow: 0 0 3px;
+            border: 0;
+        }
+
+.rememberme {
+    width: 80%;
+    display: inline-flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+}
+
+.submitLogin {
+    width: 100%;
+    margin: 10px 0px;
+}
+
+    .submitLogin button {
+        width: 70%;
+        padding: 5px 0px;
+        background-color: #4f77ff;
+        border: #4f77ff;
+        padding: 10px;
+        border-radius: 3px;
+        color: #fff;
+    }
+
+.register {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+    .register h2 {
+        margin: 20px;
+    }
+
+    .register .input {
+        padding: 10px;
+    }
+
+        .register .input input {
+            padding: 15px;
+            width: 80%;
+            box-shadow: 0 0 3px;
+            border: 0;
+        }
+
+    .register p {
+        font-size: 10px;
+    }
+
+button {
+    cursor: pointer;
+}

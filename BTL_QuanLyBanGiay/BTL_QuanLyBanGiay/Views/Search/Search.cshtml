@@ -1,0 +1,163 @@
+﻿@using BTL_QuanLyBanGiay.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<SanPham>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="ads-grid_shop">
+    <div class="shop_inner_inf">
+        <!-- tittle heading -->
+        <!-- //tittle heading -->
+        <!-- product left -->
+        <div class="side-bar col-md-3">
+            <div class="search-hotel">
+                <h3 class="agileits-sear-head">Search Here..</h3>
+                @using (Html.BeginForm("Search", "Search", FormMethod.Post))
+                {
+                    <input type="search" placeholder="Product name..." name="txtSearch" id="txtSearch" required>
+                    <input type="submit" value=" ">
+                }
+
+
+            </div>
+            <!-- price range -->
+            <div class="range">
+                <h3 class="agileits-sear-head">Price range</h3>
+                <ul class="dropdown-menu6">
+                    <li>
+
+                        <div id="slider-range"></div>
+                        <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
+                    </li>
+                </ul>
+            </div>
+            <!-- //price range -->
+            <!--preference -->
+            <div class="left-side">
+                <h3 class="agileits-sear-head">Category</h3>
+                <ul>
+                    @Html.Action("TheLoai", "Home")
+                </ul>
+            </div>
+            <!-- // preference -->
+            <!-- discounts -->
+            <div class="left-side">
+                <h3 class="agileits-sear-head">Discount</h3>
+                <ul>
+                    <li>
+                        <input type="checkbox" class="checked">
+                        <span class="span">5% or More</span>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="checked">
+                        <span class="span">10% or More</span>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="checked">
+                        <span class="span">20% or More</span>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="checked">
+                        <span class="span">30% or More</span>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="checked">
+                        <span class="span">50% or More</span>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="checked">
+                        <span class="span">60% or More</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- //discounts -->
+            <!-- deals -->
+            <div class="deal-leftmk left-side">
+                <h3 class="agileits-sear-head">Special Deals</h3>
+                <div class="special-sec1">
+                    @{
+                        int y = 0;
+                        foreach (var item in (PagedList.IPagedList<SanPham>)Session["lsp"])
+                        {
+                            //((List<SanPham>)Session["lsp"]).Add(item);
+                            y++;
+                            <div class="col-xs-4 img-deals">
+                                <img src="@Url.Content("~/images/"+item.Anh)" alt="">
+                            </div>
+                            <div class="col-xs-8 img-deal1">
+                                <h3>@item.TenSP</h3>
+                                @Html.ActionLink(string.Format("{0:0,00}", (Double.Parse(item.DonGiaBan.ToString()))) + "đ", "XemChiTiet", new { MaSP = item.MaSP })
+                            </div>
+                            <div class="clearfix"></div>
+                            if (y == 5)
+                            {
+                                break;
+                            }
+                        }
+                    }
+
+                </div>
+            </div>
+            <!-- //deals -->
+
+        </div>
+        <!-- //product left -->
+        <!-- product right -->
+        <div class="left-ads-display col-md-9">
+            <div class="wrapper_top_shop">
+                <div class="product-sec1">
+                    @if (ViewBag.Err != null)
+                    {
+                        <h5>@ViewBag.Err</h5>
+                    }
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <div class="product-single product-men">
+                                <div class="product-shoe-info-shop shoe">
+                                    <div class="men-pro-item">
+                                        <div class="men-thumb-item">
+                                            <img src="@Url.Content("~/images/"+item.Anh)" alt="">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="@Url.Action("XemChiTiet","Home",new { @MaSP=item.MaSP})" class="link-product-add-cart">Quick View</a>
+                                                </div>
+                                            </div>
+                                            <span class="product-new-top">New</span>
+                                        </div>
+                                        <div class="item-info-product">
+                                            <h4>
+                                                <a href="@Url.Action("XemChiTiet","Home",new { @MaSP=item.MaSP})">@item.TenSP</a>
+                                            </h4>
+                                            <div class="info-product-price">
+                                                <div style=" padding: 4% 0 0 0;">
+                                                    <span class="money ">@string.Format("{0:0,00}", (Double.Parse(item.DonGiaBan.ToString()))) đ</span>
+                                                </div>
+                                                <div>
+                                                    <button type="submit" class="favorite">
+                                                        <i class="far fa-heart" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+            @if (Model.PageCount > 1)
+            {
+                <div class="menuPage">
+                    @Html.PagedListPager(Model, page => Url.Action("Search", new { page = page, @searchkey = ViewBag.keyW }))
+                </div>
+            }
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

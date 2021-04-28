@@ -1,0 +1,189 @@
+﻿@using BTL_QuanLyBanGiay.Models;
+@{
+    ViewBag.shop = "Shop";
+    ViewBag.Title = "Check Out";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="ads-grid_shop">
+    <div class="shop_inner_inf">
+        <div class="privacy about">
+            @{
+                if (Session["cart"] == null || ((List<Cart>)Session["cart"]).Count==0)
+                {
+                    <h2 style="margin-bottom:20px">Your shopping cart is empty</h2>
+                    <div class="occasion-cart">
+                        <div class="shoe single-item single_page_b">
+                            <form action="#" method="post">
+                                    <a href="@Url.Action("Shop", "Home")" class="buttonadd" >Continue to shop</a>
+                            </form>
+
+                        </div>
+
+                    </div>
+                }
+                else
+                {
+                    <h3>Chec<span>kout</span></h3>
+
+                    <div class="checkout-right">
+                        <h4>Your shopping cart contains: <span id="countProd">@(((List<Cart>)Session["cart"]).Sum(item => item.SoLuong))</span><span> Products</span></h4>
+                        <table class="timetable_sub">
+                            <thead>
+                                <tr>
+                                    <th>SL No.</th>
+                                    <th>Product</th>
+                                    <th>Quality</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 0;
+                                    foreach (Cart item in (List<Cart>)Session["cart"])
+                                    {
+                                        i++;
+                                        <tr class="rem1">
+                                            <td class="invert">@i</td>
+                                            <td class="invert-image"><a href="@Url.Action("XemChiTiet", "Home", new { MaSP = item.SanPham.MaSP })"><img src="@Url.Content("~/images/" + item.SanPham.Anh)" alt=" " class="img-responsive"></a></td>
+                                            <td class="invert">
+                                                <div class="quantity-select">
+                                                    <div><a class="entry value-minus" id="minusCart" masp="@item.SanPham.MaSP" onclick="minusCart(this)"></a></div>
+                                                    <div class="entry value"><span id="@(item.SanPham.MaSP+"span")">@item.SoLuong.ToString()</span></div>
+                                                    <div><a class="entry value-plus" masp="@item.SanPham.MaSP" onclick="plusCart(this)"></a></div>
+                                                </div>    
+                                            </td>
+                                            <td class="invert">@item.SanPham.TenSP<p>Size: @item.SanPham.Co.TenCo</p></td>
+
+                                            <td class="invert" id="@(item.SanPham.MaSP+"td")">@string.Format("{0:0}",(item.SanPham.DonGiaBan * item.SoLuong)) đ</td>
+                                            <td class="rem">
+                                                <div>
+                                                    <a href="@Url.Action("Remove","Cart",new { id=item.SanPham.MaSP})" class="close1"></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="checkout-left">
+                        <div class="col-md-4 checkout-left-basket">
+                            <h4>Continue to basket</h4>
+                            <ul>
+                                @{
+                                    int x = 0;
+                                    foreach (Cart item in (List<Cart>)Session["cart"])
+                                    {
+                                        x++;
+                                        <li>Product @x<i>-</i> <span id="@(item.SanPham.MaSP+"spanM")">@string.Format("{0:0,00}",(item.SoLuong * item.SanPham.DonGiaBan)) đ</span></li>
+                                    }
+                                }
+                                <li class="totalGH">Total <i>-</i> <span id="totalMoney">@string.Format("{0:0,00}",(((List<Cart>)Session["cart"]).Sum(item => item.SoLuong * item.SanPham.DonGiaBan))) đ</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-8 address_form">
+                            <h4>Add a new Details</h4>
+                            @using (Html.BeginForm("Index", "Orders", FormMethod.Post))
+                {
+                        <section class="creditly-wrapper wrapper">
+                            <div class="information-wrapper">
+                                <div class="first-row form-group">
+                                    <div class="controls">
+                                        <label class="control-label">Full name: </label>
+                                        <input class="billing-address-name form-control" type="text" name="TenKhach" id="TenKhach" placeholder="Full name" required>
+                                    </div>
+                                    <div class="card_number_grids">
+                                        <div class="card_number_grid_left">
+                                            <div class="controls">
+                                                <label class="control-label">Mobile number:</label>
+                                                <input class="form-control" type="tel" placeholder="Mobile number" id="DienThoai" name="DienThoai" required>
+                                            </div>
+                                        </div>
+                                        <div class="card_number_grid_right">
+                                            <div class="controls">
+                                                <label class="control-label">Email: </label>
+                                                <input class="form-control" type="email" placeholder="Email" id="Email" name="Email" required>
+                                            </div>
+                                        </div>
+                                        <div class="clear"> </div>
+                                    </div>
+                                    <div class="controls">
+                                        <label class="control-label">Address: </label>
+                                        <input class="form-control" type="text" placeholder="Address" id="DiaChi" name="DiaChi" required>
+                                    </div>
+                                </div>
+                                <button class="submit check_out">Order</button>
+                            </div>
+                        </section>
+                }
+                                
+                        </div>
+
+                        <div class="clearfix"> </div>
+
+
+                        <div class="clearfix"></div>
+                    </div>
+                                    }
+            }
+        </div>
+    </div>
+</div>
+<script>
+    function plusCart(item) {
+        var MaSP = $(item).attr("masp");
+        var formdata = new FormData();
+        formdata.append("MaSP", MaSP);
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formdata,
+            url: '/Cart/Plus',
+            success: function (data) {
+                $('#countCart,#countProd').text(data.Counter);
+                $('#' + MaSP+'span').text(data.SoLuong);
+                $('#' + MaSP + 'td').text(data.Money + 'đ');
+                $('#' + MaSP + 'spanM').text(data.Money + 'đ');
+                $('#totalMoney').text(data.TotalM + 'đ');
+                if (data.SoLuong > 0) {
+                    $('#minusCart').css("pointer-events", "visible");
+                }
+            },
+            error: function () {
+                alert("There is some problem");
+            }
+        });
+    }
+    function minusCart(item) {
+        var MaSP = $(item).attr("masp");
+        var formdata = new FormData();
+        formdata.append("MaSP", MaSP);
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formdata,
+            url: '/Cart/Minus',
+            success: function (data) {
+                $('#countCart,#countProd').text(data.Counter);
+                $('#' + MaSP + 'span').text(data.SoLuong);
+                $('#' + MaSP + 'td').text(data.Money + 'đ');
+                $('#' + MaSP + 'spanM').text(data.Money + 'đ');
+                $('#totalMoney').text(data.TotalM + 'đ');
+                if (data.SoLuong <= 0) {
+                    $('#minusCart').css("pointer-events", "none");
+                }
+            },
+            error: function () {
+                alert("There is some problem");
+            }
+        });
+    }
+</script>
+
+

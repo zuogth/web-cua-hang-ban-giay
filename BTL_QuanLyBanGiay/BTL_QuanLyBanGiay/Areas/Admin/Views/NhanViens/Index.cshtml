@@ -1,0 +1,71 @@
+﻿@using BTL_QuanLyBanGiay.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<NhanVien>
+
+@{
+    ViewBag.active = 1;
+    ViewBag.Title = "Staffs";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="~/Assest/admin/css/table-admin.css" rel="stylesheet" />
+<p>
+    <a href="@Url.Action("Create","NhanViens")" class="btn btn-default"><i class="fa fa-plus"></i>Create</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Tên NV
+        </th>
+        <th>
+            Giới tính
+        </th>
+        <th>
+            Ngày sinh
+        </th>
+        <th>
+            Điện thoại
+        </th>
+        <th>
+            Địa chỉ
+        </th>
+        <th>
+            Công việc
+        </th>
+        <th></th>
+    </tr>
+        </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenNV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GioiTinh)
+        </td>
+        <td>
+            @string.Format("{0:dd/MM/yyyy}", item.NgaySinh)
+            @*@Html.DisplayFor(modelItem => item.NgaySinh)*@
+        </td>
+        <td>           
+           @Html.DisplayFor(modelItem => item.DienThoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaChi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CongViec.TenCV)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit","NhanViens",new { MaNV=item.MaNV})"><i class="fa fa-edit"></i></a>
+            <a href="@Url.Action("Details","NhanViens",new { MaNV=item.MaNV})"><i class="fa fa-info-circle"></i></a>
+            <a href="@Url.Action("Delete","NhanViens",new { MaNV=item.MaNV})"><i class="fa fa-trash-o"></i></a>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+<div class="menuPage">
+    @Html.PagedListPager(Model,page=>Url.Action("Index",new { page=page}))
+</div>

@@ -1,0 +1,71 @@
+﻿@model BTL_QuanLyBanGiay.Areas.Admin.Data.LoginModel
+@{ 
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Assest/admin/css/pageLogin.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="loginWith">
+            <div class="img">
+                <img src="~/images/b1.jpg" />
+            </div>
+            <h5>Login using social media to get quick access</h5>
+            <div>
+                <button class="btnFace"><i class="fab fa-facebook-f"></i> Signin with Facebook</button>
+            </div>
+            <div>
+                <button class="btnTwitter"><i class="fab fa-twitter"></i> Signin with Twitter</button>
+            </div>
+            <div>
+                <button class="btnGoogle"><i class="fab fa-google-plus-g"></i> Signin with Google</button>
+            </div>
+        </div>
+        <div class="login-register">
+            <div class="login">
+                <h2>Login to your account</h2>
+                <span>Don't have an account?</span><a href="@Url.Action("Register")">Sign Up Free!</a>
+                @if (ViewBag.Err != null)
+                {
+                    <h6 style="color:red;">@ViewBag.Err</h6>
+                }
+                @using (Html.BeginForm("Login", "User"))
+                {
+                    <div class="input">
+                        @*<input type="text" name="username" id="username" placeholder="UserName">*@
+                        @Html.TextBoxFor(x => x.UserName, new { @class = "", @placeholder = "Username" })
+                    </div>
+                    <div class="input">
+                        @*<input type="password" name="password" id="password" placeholder="PassWord">*@
+                        @Html.PasswordFor(x => x.PassWord, new { @class = "", @placeholder = "Password" })
+                    </div>
+                    <div class="rememberme">
+                        <div>
+                            <input type="checkbox" name="remember" id="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <div>
+                            <a href="#">Forgot password?</a>
+                        </div>
+                    </div>
+                    <div class="submitLogin">
+                        <button type="submit">Login</button>
+                    </div>
+                }
+
+            </div>         
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿@model BTL_QuanLyBanGiay.Models.HoaDonBan
+
+@{
+    ViewBag.active = 4;
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Session["SoHDB"] = Model.SoHDB;
+}
+<div>
+    <h4>Hóa đơn bán</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã hóa đơn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoHDB)
+        </dd>
+        <dt>
+            Ngày bán
+        </dt>
+
+        <dd>
+            @string.Format("{0:dd/MM/yyyy}", Model.NgayBan)
+            @*@Html.DisplayFor(model => model.NgayBan)*@
+        </dd>
+
+        <dt>
+            Tổng tiền
+        </dt>
+
+        <dd>
+            @string.Format("{0:0,00}",Model.TongTien) đ
+        </dd>
+
+        <dt>
+            Khách hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHang.TenKhach)
+        </dd>
+
+    </dl>
+    @{ Html.RenderAction("Index", "ChiTietHDBs");}
+</div>
+<p>
+    <a href="@Url.Action("Index","HoaDonBans")" class="btn btn-default"><i class="fa fa-arrow-left"></i>Back</a>
+</p>
+

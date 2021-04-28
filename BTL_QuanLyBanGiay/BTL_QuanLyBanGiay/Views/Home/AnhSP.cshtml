@@ -1,0 +1,11 @@
+﻿@model List<BTL_QuanLyBanGiay.Models.AnhSP>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <li data-thumb="@Url.Content("~/images/"+item.TenFileA)">
+        <div class="thumb-image"> <img src="@Url.Content("~/images/"+item.TenFileA)" data-imagezoom="true" class="img-responsive"> </div>
+    </li>
+}

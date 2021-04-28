@@ -1,0 +1,83 @@
+﻿@using BTL_QuanLyBanGiay.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<SanPham>
+
+@{
+    ViewBag.active = 0;
+    ViewBag.Title = "Products";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="~/Assest/admin/css/table-admin.css" rel="stylesheet" />
+<p>
+    <a href="@Url.Action("CreateProduct","Products")" class="btn btn-default"><i class="fa fa-plus"></i>Create</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Tên SP
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Ảnh
+        </th>
+        <th>
+            Chất liệu
+        </th>
+        <th>
+            Cỡ
+        </th>
+        <th>
+            Đối tượng
+        </th>
+        <th>
+            Màu
+        </th>
+        <th>
+            Thể loại
+        </th>
+        <th></th>
+    </tr>
+        </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                <img src="@Url.Content("~/images/"+Html.DisplayFor(modelItem => item.Anh))" width="60" height="60" />
+            <td>
+                @Html.DisplayFor(modelItem => item.ChatLieu.TenChatLieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Co.TenCo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoiTuong.TenDoiTuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mau.TenMau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheLoai.TenLoai)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit","Products",new { MaSP=item.MaSP})"><i class="fa fa-edit"></i></a>
+                <a href="@Url.Action("Details","Products",new { MaSP=item.MaSP})"><i class="fa fa-info-circle"></i></a>
+                <a href="@Url.Action("Delete","Products",new { MaSP=item.MaSP})"><i class="fa fa-trash-o"></i></a>
+            </td>
+        </tr>
+    }
+        </tbody>
+</table>
+<div class="menuPage">
+    @Html.PagedListPager(Model, page => Url.Action("Products", new { page = page }))
+</div>
+

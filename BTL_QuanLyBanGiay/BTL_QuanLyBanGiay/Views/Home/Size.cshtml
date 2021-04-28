@@ -1,0 +1,9 @@
+﻿@using BTL_QuanLyBanGiay.Models;
+@model List<SanPham>
+
+@{ 
+    foreach(var item in Model)
+            {
+                <a href="@Url.Action("XemChiTiet","Home",new { MaSP=item.MaSP})" class="buttonSize" id="@item.MaSP">@item.Co.TenCo</a>
+            }
+}
