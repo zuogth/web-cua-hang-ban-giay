@@ -12,15 +12,15 @@ namespace BTL_QuanLyBanGiay.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChiTietHDB
+    public partial class DanhGia
     {
-        public int SoHDB { get; set; }
-        public string MaSP { get; set; }
-        public string GiamGia { get; set; }
-        public Nullable<int> SoLuong { get; set; }
-        public Nullable<int> MaDG { get; set; }
+        public int MaDG { get; set; }
+        public string TenSP { get; set; }
+        public int MaKhach { get; set; }
+        public string NoiDung { get; set; }
+        public Nullable<System.DateTime> NgayDG { get; set; }
+        public Nullable<int> DanhGiaStar { get; set; }
     
-        public virtual HoaDonBan HoaDonBan { get; set; }
-        public virtual SanPham SanPham { get; set; }
+        public virtual KhachHang KhachHang { get; set; }
     }
 }

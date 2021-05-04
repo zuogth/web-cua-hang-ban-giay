@@ -25,7 +25,6 @@ namespace BTL_QuanLyBanGiay.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AnhSP> AnhSPs { get; set; }
         public virtual DbSet<ChatLieu> ChatLieux { get; set; }
         public virtual DbSet<ChiTietHDB> ChiTietHDBs { get; set; }
         public virtual DbSet<ChiTietHDN> ChiTietHDNs { get; set; }
@@ -42,5 +41,7 @@ namespace BTL_QuanLyBanGiay.Models
         public virtual DbSet<NuocSanXuat> NuocSanXuats { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<TheLoai> TheLoais { get; set; }
+        public virtual DbSet<AnhSP> AnhSPs { get; set; }
+        public virtual DbSet<DanhGia> DanhGias { get; set; }
     }
 }

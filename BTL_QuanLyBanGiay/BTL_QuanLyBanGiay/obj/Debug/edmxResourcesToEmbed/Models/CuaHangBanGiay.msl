@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CuaHangBanGiayModelStoreContainer" CdmEntityContainer="CuaHangBanGiayEntities">
-    <EntitySetMapping Name="AnhSPs">
-      <EntityTypeMapping TypeName="CuaHangBanGiayModel.AnhSP">
-        <MappingFragment StoreEntitySet="AnhSP">
-          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-          <ScalarProperty Name="TenFileA" ColumnName="TenFileA" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ChatLieux">
       <EntityTypeMapping TypeName="CuaHangBanGiayModel.ChatLieu">
         <MappingFragment StoreEntitySet="ChatLieu">
@@ -20,6 +12,7 @@
     <EntitySetMapping Name="ChiTietHDBs">
       <EntityTypeMapping TypeName="CuaHangBanGiayModel.ChiTietHDB">
         <MappingFragment StoreEntitySet="ChiTietHDB">
+          <ScalarProperty Name="MaDG" ColumnName="MaDG" />
           <ScalarProperty Name="SoHDB" ColumnName="SoHDB" />
           <ScalarProperty Name="MaSP" ColumnName="MaSP" />
           <ScalarProperty Name="GiamGia" ColumnName="GiamGia" />
@@ -97,6 +90,8 @@
     <EntitySetMapping Name="KhachHangs">
       <EntityTypeMapping TypeName="CuaHangBanGiayModel.KhachHang">
         <MappingFragment StoreEntitySet="KhachHang">
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="MaKhach" ColumnName="MaKhach" />
           <ScalarProperty Name="TenKhach" ColumnName="TenKhach" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -167,6 +162,27 @@
         <MappingFragment StoreEntitySet="TheLoai">
           <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
           <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnhSPs">
+      <EntityTypeMapping TypeName="CuaHangBanGiayModel.AnhSP">
+        <MappingFragment StoreEntitySet="AnhSP">
+          <ScalarProperty Name="TenFileA" ColumnName="TenFileA" />
+          <ScalarProperty Name="MaMau" ColumnName="MaMau" />
+          <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DanhGias">
+      <EntityTypeMapping TypeName="CuaHangBanGiayModel.DanhGia">
+        <MappingFragment StoreEntitySet="DanhGia">
+          <ScalarProperty Name="DanhGiaStar" ColumnName="DanhGiaStar" />
+          <ScalarProperty Name="NgayDG" ColumnName="NgayDG" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="MaKhach" ColumnName="MaKhach" />
+          <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+          <ScalarProperty Name="MaDG" ColumnName="MaDG" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

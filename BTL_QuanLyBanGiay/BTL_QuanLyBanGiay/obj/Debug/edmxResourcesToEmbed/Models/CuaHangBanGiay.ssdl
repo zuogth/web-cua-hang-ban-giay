@@ -2,10 +2,12 @@
 <Schema Namespace="CuaHangBanGiayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AnhSP">
     <Key>
-      <PropertyRef Name="MaSP" />
+      <PropertyRef Name="TenSP" />
+      <PropertyRef Name="MaMau" />
       <PropertyRef Name="TenFileA" />
     </Key>
-    <Property Name="MaSP" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TenSP" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MaMau" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="TenFileA" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="ChatLieu">
@@ -24,6 +26,7 @@
     <Property Name="MaSP" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="GiamGia" Type="nvarchar" MaxLength="10" />
     <Property Name="SoLuong" Type="int" />
+    <Property Name="MaDG" Type="int" />
   </EntityType>
   <EntityType Name="ChiTietHDN">
     <Key>
@@ -50,6 +53,17 @@
     </Key>
     <Property Name="MaCV" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="TenCV" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DanhGia">
+    <Key>
+      <PropertyRef Name="MaDG" />
+    </Key>
+    <Property Name="MaDG" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenSP" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MaKhach" Type="int" Nullable="false" />
+    <Property Name="NoiDung" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="NgayDG" Type="date" />
+    <Property Name="DanhGiaStar" Type="int" />
   </EntityType>
   <EntityType Name="DoiTuong">
     <Key>
@@ -92,10 +106,12 @@
       <PropertyRef Name="MaKhach" />
     </Key>
     <Property Name="MaKhach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TenKhach" Type="nvarchar" MaxLength="50" />
+    <Property Name="TenKhach" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
-    <Property Name="DienThoai" Type="nvarchar" MaxLength="15" />
+    <Property Name="DienThoai" Type="nvarchar" MaxLength="15" Nullable="false" />
     <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nchar" MaxLength="20" />
+    <Property Name="GioiTinh" Type="nchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="Mau">
     <Key>
@@ -156,18 +172,6 @@
     <Property Name="MaLoai" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="TenLoai" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <Association Name="FK_AnhSP_SanPham">
-    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-    <End Role="AnhSP" Type="Self.AnhSP" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SanPham">
-        <PropertyRef Name="MaSP" />
-      </Principal>
-      <Dependent Role="AnhSP">
-        <PropertyRef Name="MaSP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ChiTietHDB_HoaDonBan">
     <End Role="HoaDonBan" Type="Self.HoaDonBan" Multiplicity="1" />
     <End Role="ChiTietHDB" Type="Self.ChiTietHDB" Multiplicity="*" />
@@ -213,6 +217,18 @@
       </Principal>
       <Dependent Role="ChiTietHDN">
         <PropertyRef Name="MaSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DanhGia_KhachHang">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+    <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="MaKhach" />
+      </Principal>
+      <Dependent Role="DanhGia">
+        <PropertyRef Name="MaKhach" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -355,6 +371,7 @@
     <EntitySet Name="ChiTietHDN" EntityType="Self.ChiTietHDN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Co" EntityType="Self.Co" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CongViec" EntityType="Self.CongViec" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DoiTuong" EntityType="Self.DoiTuong" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GioSP" EntityType="Self.GioSP" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HoaDonBan" EntityType="Self.HoaDonBan" Schema="dbo" store:Type="Tables" />
@@ -366,10 +383,6 @@
     <EntitySet Name="NuocSanXuat" EntityType="Self.NuocSanXuat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TheLoai" EntityType="Self.TheLoai" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_AnhSP_SanPham" Association="Self.FK_AnhSP_SanPham">
-      <End Role="SanPham" EntitySet="SanPham" />
-      <End Role="AnhSP" EntitySet="AnhSP" />
-    </AssociationSet>
     <AssociationSet Name="FK_ChiTietHDB_HoaDonBan" Association="Self.FK_ChiTietHDB_HoaDonBan">
       <End Role="HoaDonBan" EntitySet="HoaDonBan" />
       <End Role="ChiTietHDB" EntitySet="ChiTietHDB" />
@@ -385,6 +398,10 @@
     <AssociationSet Name="FK_ChiTietHDN_SanPham" Association="Self.FK_ChiTietHDN_SanPham">
       <End Role="SanPham" EntitySet="SanPham" />
       <End Role="ChiTietHDN" EntitySet="ChiTietHDN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DanhGia_KhachHang" Association="Self.FK_DanhGia_KhachHang">
+      <End Role="KhachHang" EntitySet="KhachHang" />
+      <End Role="DanhGia" EntitySet="DanhGia" />
     </AssociationSet>
     <AssociationSet Name="FK_GioSP_SanPham" Association="Self.FK_GioSP_SanPham">
       <End Role="SanPham" EntitySet="SanPham" />

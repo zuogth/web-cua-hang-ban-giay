@@ -14,9 +14,8 @@ namespace BTL_QuanLyBanGiay.Models
     
     public partial class AnhSP
     {
-        public string MaSP { get; set; }
+        public string TenSP { get; set; }
+        public string MaMau { get; set; }
         public string TenFileA { get; set; }
-    
-        public virtual SanPham SanPham { get; set; }
     }
 }

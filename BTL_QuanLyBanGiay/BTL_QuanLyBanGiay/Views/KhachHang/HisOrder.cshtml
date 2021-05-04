@@ -1,0 +1,86 @@
+﻿@model IEnumerable<BTL_QuanLyBanGiay.Models.HoaDonBan>
+
+@{
+    ViewBag.Title = Session["KhachHang"];
+    Layout = "~/Views/_Layout.cshtml";
+}
+<link href="~/Assest/layout/css/useroptions.css" rel="stylesheet" />
+<div class="khachhang row">
+    <h2>Lịch sử mua hàng</h2>
+    <div class="noidung col-sm-8">
+        <hr />
+        @foreach (var item in Model)
+        {
+            <div class="hisorder">
+                <div class="d-flex">
+                    <div>
+                        <h4>Ngày đặt: @string.Format("{0:dd/MM/yyy}", item.NgayBan)</h4>
+                    </div>
+                    <div>
+                        <h4>Tổng tiền: <span>@string.Format("{0:0,00}", item.TongTien) đ</span></h4>
+                    </div>
+                    <div>
+                        <span><i class="fa fa-chevron-down" data-toggle="collapse" data-target="#@item.SoHDB"></i></span>
+                    </div>
+                </div>
+                <div id="@item.SoHDB" class="collapse chitietorder">
+                    @Html.Action("HisProdOrder", "KhachHang", new { SoHDB = item.SoHDB })
+                </div>
+            </div>
+        }
+        <div>
+            <a href="@Url.Action("Shop","Home")" class="buttonadd">Tiếp tục mua hàng</a>
+        </div>
+    </div>
+    <div class="options col-sm-4">
+        <ul>
+            <li><a href="">Thông tin cá nhân</a></li>
+            <li><a href="@Url.Action("HisOrder","KhachHang",new { MaKhach=Session["MaKhach"]})">Lịch sử mua hàng</a></li>
+        </ul>
+    </div>
+</div>
+<div class="formDanhgia-prod">
+
+    <form id="formDanhgia">
+        <div>
+            <input name="TenSP" id="TenSP" readonly/>
+        </div>
+        <div>
+            <input type="text" name="NoiDung" id="NoiDung" placeholder="Nội dung..." />
+        </div>
+        <div>
+            <input type="number" name="DanhGiaStar" id="DanhGiaStar" />
+        </div>
+        <div>
+            <input id="btnsubmit" type="button" value="Submit" onclick="adddanhgia(this)" />
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript">
+    function gettensp(item) {
+        $('.formDanhgia-prod').show();
+        var name = $(item).attr("data-tensp");
+        $('input#TenSP').val(name);
+    }
+    function adddanhgia(item) {        
+        //Serialize the form datas.
+        var valdata = $("#formDanhgia").serialize();
+        //to get alert popup
+        $.ajax({
+            url: "/KhachHang/AddDanhGia",
+            type: "POST",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: valdata,
+            success: function (data) {
+                $('.formDanhgia-prod').hide();
+                alert("Đánh giá thành công");
+            },
+            error: function () {
+                alert("Đánh giá thất bại");
+            }
+        });
+    };
+</script>
+

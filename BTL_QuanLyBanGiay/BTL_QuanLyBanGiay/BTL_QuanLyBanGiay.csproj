@@ -156,6 +156,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,6 +193,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CuaHangBanGiay.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DanhGia.cs">
+      <DependentUpon>CuaHangBanGiay.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DoiTuong.cs">
       <DependentUpon>CuaHangBanGiay.tt</DependentUpon>
@@ -274,6 +278,7 @@
     <Content Include="Assest\layout\css\shopnow.css" />
     <Content Include="Assest\layout\css\style7.css" />
     <Content Include="Assest\layout\css\styles.css" />
+    <Content Include="Assest\layout\css\useroptions.css" />
     <Content Include="Assest\layout\fonts\fontawesome-webfont.svg" />
     <Content Include="Assest\layout\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assest\layout\images\computer-1867758_1920-min.jpg" />
@@ -480,6 +485,13 @@
     <Content Include="Views\Home\TheLoai.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Home\Size.cshtml" />
+    <Content Include="Views\Home\DanhGia.cshtml" />
+    <Content Include="Views\KhachHang\Login.cshtml" />
+    <Content Include="Views\KhachHang\Signup.cshtml" />
+    <Content Include="Views\KhachHang\Index.cshtml" />
+    <Content Include="Views\KhachHang\Edit.cshtml" />
+    <Content Include="Views\KhachHang\HisOrder.cshtml" />
+    <Content Include="Views\KhachHang\HisProdOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

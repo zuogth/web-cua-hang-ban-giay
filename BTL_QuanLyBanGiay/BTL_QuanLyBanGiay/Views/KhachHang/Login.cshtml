@@ -1,0 +1,22 @@
+﻿@model BTL_QuanLyBanGiay.Models.KhachHang
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/_Layout.cshtml";
+}
+@if(ViewBag.Err!=null)
+            {
+                <h5>@ViewBag.Err</h5>
+            }
+@using (Html.BeginForm("Login", "KhachHang"))
+{
+    <div>
+        @Html.TextBoxFor(x => x.DienThoai, new { @class = "", @placeholder = "Số điện thoại" })
+    </div>
+    <div>
+        @Html.PasswordFor(x => x.Password, new { @class = "", @placeholder = "Mật khẩu" })
+    </div>
+    <div>
+        <button type="submit">Login</button>
+    </div>
+}
+

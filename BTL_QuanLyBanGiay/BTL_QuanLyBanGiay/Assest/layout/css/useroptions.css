@@ -1,0 +1,75 @@
+﻿.khachhang {
+    padding: 20px;
+}
+
+.noidung {
+    border-right: 1px solid;
+}
+
+.options {
+    padding: 20px;
+}
+
+    .options ul {
+        list-style: none;
+    }
+
+        .options ul li a {
+            color: #000000;
+            text-decoration: revert;
+        }
+.hisorder {
+    padding: 20px;
+    border-bottom: 1px solid #8bbf06;
+    margin-bottom: 20px;
+}
+.d-flex{display:flex;
+        justify-content:space-around;
+}
+.d-flex h4 span{
+    color:red;
+}
+.chitietorder{
+    border-top:1px solid;
+    padding:10px;
+}
+.chitietorder img{
+    width:100%;
+}
+    .btnagain {
+        color: #fff;
+        text-decoration: none;
+        background: #000000;
+        padding: 2px 5px;
+        margin: 5px 0 0 5px;
+    }
+.list-prod-order{
+    margin-bottom:10px;
+}
+.options-order{
+    display:flex;
+    float:right;
+}
+.txtDanhgia {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    color: #ce0808;
+}
+.formDanhgia-prod {
+    box-shadow: 0 0 3px;
+    width: 50%;
+   
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: cadetblue;
+    transform: translate(-50%, -50%);
+}
+@media (max-width:768px) {
+    .chitietorder .img{
+        margin-bottom:10px;
+    }
+}

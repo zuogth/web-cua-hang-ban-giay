@@ -1,0 +1,38 @@
+﻿@model List<BTL_QuanLyBanGiay.Models.DanhGia>
+@if (ViewBag.Err != null)
+{
+    <h3>@ViewBag.Err</h3>
+}
+else
+{
+    <div class="review-star col-sm-4">
+        <div class="star"><h2>@((double)Model.Sum(x=>x.DanhGiaStar) /Model.Count) </h2><span>@Model.Count reviews</span></div>
+        <h4>Phân tích đánh giá</h4>
+        <ul>
+            <li>(<span>@Model.Count(x => x.DanhGiaStar == 5)</span>)<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></li>
+            <li>(<span>@Model.Count(x => x.DanhGiaStar == 4)</span>)<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></li>
+            <li>(<span>@Model.Count(x => x.DanhGiaStar == 3)</span>)<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></li>
+            <li>(<span>@Model.Count(x => x.DanhGiaStar == 2)</span>)<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></li>
+            <li>(<span>@Model.Count(x => x.DanhGiaStar == 1)</span>)<span class="fa fa-star checked"></span></li>
+        </ul>
+
+    </div>
+    <div class="col-sm-8">
+        @foreach (var item in Model)
+        {
+            <div class="content">
+                <h5>
+                    @for (int i = 0; i < item.DanhGiaStar; i++)
+                    {
+                        <span class="fa fa-star checked"></span>
+                    }
+                </h5>
+                <h3>@item.KhachHang.TenKhach</h3>
+                <i>@string.Format("{0:dd/MM/yyyy}", item.NgayDG)</i>
+                <p>@item.NoiDung</p>
+                <hr />
+            </div>
+        }
+    </div>
+}
+

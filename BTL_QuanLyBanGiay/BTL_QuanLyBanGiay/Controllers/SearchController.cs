@@ -18,6 +18,7 @@ namespace BTL_QuanLyBanGiay.Controllers
             string search = f["txtSearch"].ToString();
             ViewBag.keyW = search;
             List<SanPham> lsp = db.SanPhams.Where(x => x.TenSP.Contains(search)).ToList();
+            lsp = lsp.GroupBy(x => x.TenSP).Select(grb => grb.First()).ToList();
             int pageSize = 6;
             int pageNumber = (page ?? 1);
             if(lsp.Count==0)
@@ -32,6 +33,7 @@ namespace BTL_QuanLyBanGiay.Controllers
         {
             ViewBag.keyW = search;
             List<SanPham> lsp = db.SanPhams.Where(x => x.TenSP.Contains(search)).ToList();
+            lsp = lsp.GroupBy(x => x.TenSP).Select(grb => grb.First()).ToList();
             int pageSize = 6;
             int pageNumber = (page ?? 1);
             if (lsp.Count == 0)

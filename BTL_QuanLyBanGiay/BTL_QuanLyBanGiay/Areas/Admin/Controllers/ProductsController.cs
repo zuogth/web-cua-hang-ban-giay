@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -46,10 +47,16 @@ namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateProduct([Bind(Include ="MaSP,TenSP,MaLoai,MaCo,MaChatLieu,MaMau,MaDoiTuong,MaNuocSX,SoLuong,DonGiaNhap,DonGiaBan,Anh")]SanPham sp)
+        public ActionResult CreateProduct(HttpPostedFileBase Anh, [Bind(Include ="MaSP,TenSP,MaLoai,MaCo,MaChatLieu,MaMau,MaDoiTuong,MaNuocSX,SoLuong,DonGiaNhap,DonGiaBan,Anh")]SanPham sp)
         {
             if (ModelState.IsValid)
             {
+                string fileName = Path.GetFileNameWithoutExtension(Anh.FileName);
+                string extension = Path.GetExtension(Anh.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                sp.Anh = fileName;
+                string path = Path.Combine(Server.MapPath("~/images/"), fileName);
+                Anh.SaveAs(path);
                 db.SanPhams.Add(sp);
                 db.SaveChanges();
                 return RedirectToAction("Products");
@@ -78,10 +85,16 @@ namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaSP,TenSP,MaLoai,MaCo,MaChatLieu,MaMau,MaDoiTuong,MaNuocSX,SoLuong,DonGiaNhap,DonGiaBan,Anh")] SanPham sp)
+        public ActionResult Edit(HttpPostedFileBase Anh, [Bind(Include = "MaSP,TenSP,MaLoai,MaCo,MaChatLieu,MaMau,MaDoiTuong,MaNuocSX,SoLuong,DonGiaNhap,DonGiaBan,Anh")] SanPham sp)
         {
             if(ModelState.IsValid)
             {
+                string fileName = Path.GetFileNameWithoutExtension(Anh.FileName);
+                string extension = Path.GetExtension(Anh.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                sp.Anh = fileName;
+                string path = Path.Combine(Server.MapPath("~/images/"), fileName);
+                Anh.SaveAs(path);
                 db.Entry(sp).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Products");
@@ -104,7 +117,7 @@ namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
         {
             SanPham sp = db.SanPhams.SingleOrDefault(x => x.MaSP == MaSP);
             var anh = from p in db.AnhSPs
-                      where p.MaSP == sp.MaSP
+                      where p.TenSP == sp.TenSP
                       select p;
             if (sp == null)
             {

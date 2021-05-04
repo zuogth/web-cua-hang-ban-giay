@@ -1,0 +1,27 @@
+﻿@model IEnumerable<BTL_QuanLyBanGiay.Models.ChiTietHDB>
+
+
+@foreach (var item in Model) {
+<div class="row list-prod-order">
+    <div class="col-sm-2 img">
+        <img src="@Url.Content("~/images/"+item.SanPham.Anh)" />
+    </div>
+    <div class="col-sm-10">
+        <div>
+            <h5>@item.SanPham.TenSP</h5>
+            <h5>Màu: @item.SanPham.Mau.TenMau, Size: @item.SanPham.Co.TenCo</h5>
+            <h5>Đơn giá: @string.Format("{0:0,00}", item.SanPham.DonGiaBan) đ</h5>
+            <h5>x: @item.SoLuong</h5>
+        </div>
+        <div class="options-order">
+            <a href="@Url.Action("XemChiTiet","Home",new { MaSP=item.SanPham.MaSP})" class="btnagain">Mua lần nữa</a>
+            <a href="#" class="btnagain" id="btnDanhgia" onclick="gettensp(this)" data-tensp="@item.SanPham.TenSP">Đánh giá</a>
+        </div>
+        <h5 class="txtDanhgia">Chưa đánh giá</h5>
+    </div>
+</div>
+    
+}
+
+
+

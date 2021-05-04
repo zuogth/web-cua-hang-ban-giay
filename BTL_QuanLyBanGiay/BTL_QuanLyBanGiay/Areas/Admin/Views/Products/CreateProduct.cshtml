@@ -7,11 +7,11 @@
 }
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("CreateProduct","Products", FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.MaSP,"Mã SP", htmlAttributes: new { @class = "control-label col-md-2" })

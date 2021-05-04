@@ -1,14 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="CuaHangBanGiayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="AnhSP">
-    <Key>
-      <PropertyRef Name="MaSP" />
-      <PropertyRef Name="TenFileA" />
-    </Key>
-    <Property Name="MaSP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="TenFileA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="SanPham" Relationship="Self.FK_AnhSP_SanPham" FromRole="AnhSP" ToRole="SanPham" />
-  </EntityType>
   <EntityType Name="ChatLieu">
     <Key>
       <PropertyRef Name="MaChatLieu" />
@@ -28,6 +19,7 @@
     <Property Name="SoLuong" Type="Int32" />
     <NavigationProperty Name="HoaDonBan" Relationship="Self.FK_ChiTietHDB_HoaDonBan" FromRole="ChiTietHDB" ToRole="HoaDonBan" />
     <NavigationProperty Name="SanPham" Relationship="Self.FK_ChiTietHDB_SanPham" FromRole="ChiTietHDB" ToRole="SanPham" />
+    <Property Name="MaDG" Type="Int32" />
   </EntityType>
   <EntityType Name="ChiTietHDN">
     <Key>
@@ -107,11 +99,14 @@
       <PropertyRef Name="MaKhach" />
     </Key>
     <Property Name="MaKhach" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TenKhach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TenKhach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="DienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HoaDonBans" Relationship="Self.FK_KhachHang_HoaDonBan" FromRole="KhachHang" ToRole="HoaDonBan" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="GioiTinh" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="DanhGias" Relationship="CuaHangBanGiayModel.FK_DanhGia_KhachHang" FromRole="KhachHang" ToRole="DanhGia" />
   </EntityType>
   <EntityType Name="Mau">
     <Key>
@@ -169,7 +164,6 @@
     <Property Name="DonGiaNhap" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="DonGiaBan" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="Anh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AnhSPs" Relationship="Self.FK_AnhSP_SanPham" FromRole="SanPham" ToRole="AnhSP" />
     <NavigationProperty Name="ChatLieu" Relationship="Self.FK_SanPham_ChatLieu" FromRole="SanPham" ToRole="ChatLieu" />
     <NavigationProperty Name="ChiTietHDBs" Relationship="Self.FK_ChiTietHDB_SanPham" FromRole="SanPham" ToRole="ChiTietHDB" />
     <NavigationProperty Name="ChiTietHDNs" Relationship="Self.FK_ChiTietHDN_SanPham" FromRole="SanPham" ToRole="ChiTietHDN" />
@@ -188,18 +182,6 @@
     <Property Name="TenLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="SanPhams" Relationship="Self.FK_SanPham_TheLoai" FromRole="TheLoai" ToRole="SanPham" />
   </EntityType>
-  <Association Name="FK_AnhSP_SanPham">
-    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-    <End Role="AnhSP" Type="Self.AnhSP" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SanPham">
-        <PropertyRef Name="MaSP" />
-      </Principal>
-      <Dependent Role="AnhSP">
-        <PropertyRef Name="MaSP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_SanPham_ChatLieu">
     <End Role="ChatLieu" Type="Self.ChatLieu" Multiplicity="1" />
     <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
@@ -381,7 +363,6 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="CuaHangBanGiayEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="AnhSPs" EntityType="Self.AnhSP" />
     <EntitySet Name="ChatLieux" EntityType="Self.ChatLieu" />
     <EntitySet Name="ChiTietHDBs" EntityType="Self.ChiTietHDB" />
     <EntitySet Name="ChiTietHDNs" EntityType="Self.ChiTietHDN" />
@@ -398,10 +379,6 @@
     <EntitySet Name="NuocSanXuats" EntityType="Self.NuocSanXuat" />
     <EntitySet Name="SanPhams" EntityType="Self.SanPham" />
     <EntitySet Name="TheLoais" EntityType="Self.TheLoai" />
-    <AssociationSet Name="FK_AnhSP_SanPham" Association="Self.FK_AnhSP_SanPham">
-      <End Role="SanPham" EntitySet="SanPhams" />
-      <End Role="AnhSP" EntitySet="AnhSPs" />
-    </AssociationSet>
     <AssociationSet Name="FK_SanPham_ChatLieu" Association="Self.FK_SanPham_ChatLieu">
       <End Role="ChatLieu" EntitySet="ChatLieux" />
       <End Role="SanPham" EntitySet="SanPhams" />
@@ -462,5 +439,45 @@
       <End Role="TheLoai" EntitySet="TheLoais" />
       <End Role="SanPham" EntitySet="SanPhams" />
     </AssociationSet>
+    <EntitySet Name="AnhSPs" EntityType="CuaHangBanGiayModel.AnhSP" />
+    <EntitySet Name="DanhGias" EntityType="CuaHangBanGiayModel.DanhGia" />
+    <AssociationSet Name="FK_DanhGia_KhachHang" Association="CuaHangBanGiayModel.FK_DanhGia_KhachHang">
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+      <End Role="DanhGia" EntitySet="DanhGias" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="AnhSP">
+    <Key>
+      <PropertyRef Name="TenSP" />
+      <PropertyRef Name="MaMau" />
+      <PropertyRef Name="TenFileA" />
+    </Key>
+    <Property Name="TenSP" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MaMau" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TenFileA" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DanhGia">
+    <Key>
+      <PropertyRef Name="MaDG" />
+    </Key>
+    <Property Name="MaDG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenSP" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MaKhach" Type="Int32" Nullable="false" />
+    <Property Name="NoiDung" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NgayDG" Type="DateTime" Precision="0" />
+    <Property Name="DanhGiaStar" Type="Int32" />
+    <NavigationProperty Name="KhachHang" Relationship="CuaHangBanGiayModel.FK_DanhGia_KhachHang" FromRole="DanhGia" ToRole="KhachHang" />
+  </EntityType>
+  <Association Name="FK_DanhGia_KhachHang">
+    <End Type="CuaHangBanGiayModel.KhachHang" Role="KhachHang" Multiplicity="1" />
+    <End Type="CuaHangBanGiayModel.DanhGia" Role="DanhGia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="MaKhach" />
+      </Principal>
+      <Dependent Role="DanhGia">
+        <PropertyRef Name="MaKhach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

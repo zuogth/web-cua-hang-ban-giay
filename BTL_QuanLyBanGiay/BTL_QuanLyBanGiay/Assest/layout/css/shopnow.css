@@ -1186,7 +1186,32 @@ button.shoe-cart {
     line-height: 2em;
     color: #888;
 }
+.single_page_star {
+    display: flex;
+}
 
+.star {
+    width: 80%;
+    text-align: center;
+    background-color: #2ada71;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.review-star ul {
+    list-style: none;
+}
+
+    .review-star ul .checked {
+        color: orange;
+    }
+
+.content p {
+    margin: 10px 0;
+}
+.content .checked{
+    color:orange;
+}
 p.para {
     margin-top: 1em;
 }

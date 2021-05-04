@@ -1,0 +1,24 @@
+﻿@model BTL_QuanLyBanGiay.Models.KhachHang
+@{
+    ViewBag.Title = "Signup";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h2>Signup</h2>
+@if (ViewBag.Err != null)
+{
+    <h5>@ViewBag.Err</h5>
+}
+@using (Html.BeginForm("Signup", "KhachHang", FormMethod.Post))
+{
+    <div>
+        <input type="tel" id="DienThoai" name="DienThoai" placeholder="Số điện thoại" required />
+    </div>
+    <div>
+        <input type="password" id="Password" name="Password" placeholder="Mật khẩu" required />
+    </div>
+    <div>
+        <button type="submit">Sign up</button>
+    </div>
+}
+

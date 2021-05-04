@@ -9,3 +9,4 @@ F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\obj\Debug\ModelWeb.csproj.CoreCompileInp
 F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\obj\Debug\ModelWeb.csproj.CopyComplete
 F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\obj\Debug\ModelWeb.dll
 F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\obj\Debug\ModelWeb.pdb
+F:\LTWeb\BTL\BTL_QuanLyBanGiay\ModelWeb\obj\Debug\ModelWeb.csprojAssemblyReference.cache

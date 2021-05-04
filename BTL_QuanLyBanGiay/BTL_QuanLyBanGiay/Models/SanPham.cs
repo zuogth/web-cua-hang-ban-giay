@@ -17,7 +17,6 @@ namespace BTL_QuanLyBanGiay.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanPham()
         {
-            this.AnhSPs = new HashSet<AnhSP>();
             this.ChiTietHDBs = new HashSet<ChiTietHDB>();
             this.ChiTietHDNs = new HashSet<ChiTietHDN>();
             this.GioSPs = new HashSet<GioSP>();
@@ -36,8 +35,6 @@ namespace BTL_QuanLyBanGiay.Models
         public Nullable<decimal> DonGiaBan { get; set; }
         public string Anh { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AnhSP> AnhSPs { get; set; }
         public virtual ChatLieu ChatLieu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHDB> ChiTietHDBs { get; set; }

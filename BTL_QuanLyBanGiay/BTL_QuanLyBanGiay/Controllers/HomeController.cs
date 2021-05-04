@@ -56,9 +56,9 @@ namespace BTL_QuanLyBanGiay.Controllers
             }
             return View(sp);
         }     
-        public PartialViewResult AnhSP(string MaSP)
+        public PartialViewResult AnhSP(string TenSP,string MaMau)
         {
-            List<AnhSP> lasp = db.AnhSPs.Where(x => x.MaSP == MaSP).ToList();
+            List<AnhSP> lasp = db.AnhSPs.Where(x => x.TenSP == TenSP && x.MaMau==MaMau).ToList();
             if(lasp==null)
             {
                 Response.StatusCode = 404;
@@ -70,6 +70,15 @@ namespace BTL_QuanLyBanGiay.Controllers
         {
             List<SanPham> lsp = db.SanPhams.Where(x => x.TenSP == TenSP && x.MaMau == MaMau).OrderBy(x => x.Co.TenCo).ToList();
             return PartialView(lsp);
+        }
+        public PartialViewResult DanhGia(string TenSP)
+        {
+            List<DanhGia> ldg = db.DanhGias.Where(x => x.TenSP == TenSP).ToList();
+            if(ldg.Count==0)
+            {
+                ViewBag.Err = "Không có đánh giá nào";
+            }
+            return PartialView(ldg);
         }
     }
 }
