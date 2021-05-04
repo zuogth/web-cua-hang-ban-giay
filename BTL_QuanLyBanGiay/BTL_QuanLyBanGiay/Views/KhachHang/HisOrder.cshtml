@@ -34,36 +34,57 @@
     </div>
     <div class="options col-sm-4">
         <ul>
-            <li><a href="">Thông tin cá nhân</a></li>
+            <li><a href="@Url.Action("Edit","KhachHang",new {MaKhach=Session["MaKhach"] })">Thông tin cá nhân</a></li>
             <li><a href="@Url.Action("HisOrder","KhachHang",new { MaKhach=Session["MaKhach"]})">Lịch sử mua hàng</a></li>
         </ul>
     </div>
 </div>
-<div class="formDanhgia-prod">
-
-    <form id="formDanhgia">
-        <div>
-            <input name="TenSP" id="TenSP" readonly/>
+<div class="modal fade" id="formdanhgiamodal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Đánh giá sản phẩm!</h4>
+            </div>
+            <div class="formDanhgia-prod">
+                <form id="formDanhgia">
+                    <div>
+                        <input class="input-tensp" name="TenSP" id="TenSP" readonly />
+                    </div>
+                    <div>
+                        <input class="input-noidung" type="text" name="NoiDung" id="NoiDung" placeholder="Nội dung..." required/>
+                    </div>
+                    <div>
+                        <label for="DanhGiaStar">Đánh giá: </label>
+                        <select name="DanhGiaStar" id="DanhGiaStar">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>  
+                        <span class="fa fa-star checked"></span>
+                    </div>
+                    <div>
+                        <input class="btn-danhgia" id="btnsubmit" type="button" value="Submit" onclick="adddanhgia(this)" />
+                    </div>
+                </form>                
+            </div>
+            @*<div class="modal-footer">
+                    <a href="@Url.Action("Index", "Cart")" id="buttonadd">Checkout</a>
+                </div>*@
         </div>
-        <div>
-            <input type="text" name="NoiDung" id="NoiDung" placeholder="Nội dung..." />
-        </div>
-        <div>
-            <input type="number" name="DanhGiaStar" id="DanhGiaStar" />
-        </div>
-        <div>
-            <input id="btnsubmit" type="button" value="Submit" onclick="adddanhgia(this)" />
-        </div>
-    </form>
-
+    </div>
 </div>
 <script type="text/javascript">
+    var nameid;
     function gettensp(item) {
-        $('.formDanhgia-prod').show();
         var name = $(item).attr("data-tensp");
         $('input#TenSP').val(name);
+        nameid = $(item).attr("id");
     }
-    function adddanhgia(item) {        
+    function adddanhgia(item) {
+        
         //Serialize the form datas.
         var valdata = $("#formDanhgia").serialize();
         //to get alert popup
@@ -72,10 +93,15 @@
             type: "POST",
             dataType: 'json',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data: valdata,
+            data:valdata,
             success: function (data) {
-                $('.formDanhgia-prod').hide();
-                alert("Đánh giá thành công");
+                $('.modal-backdrop').hide();
+                $('#formdanhgiamodal').hide();               
+                $('input#TenSP').val('');
+                $('input#NoiDung').val('');
+                $('input#DanhGiaStar').val('');
+                $('a#' + nameid).text('Xem đánh giá');
+                $('span#' + nameid).text('Đã đánh giá');
             },
             error: function () {
                 alert("Đánh giá thất bại");

@@ -73,7 +73,7 @@ namespace BTL_QuanLyBanGiay.Controllers
         }
         public PartialViewResult DanhGia(string TenSP)
         {
-            List<DanhGia> ldg = db.DanhGias.Where(x => x.TenSP == TenSP).ToList();
+            List<DanhGia> ldg = db.DanhGias.Where(x => x.TenSP== TenSP).ToList();
             if(ldg.Count==0)
             {
                 ViewBag.Err = "Không có đánh giá nào";

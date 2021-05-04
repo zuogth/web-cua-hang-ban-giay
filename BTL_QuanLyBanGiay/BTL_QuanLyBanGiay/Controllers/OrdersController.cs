@@ -36,13 +36,31 @@ namespace BTL_QuanLyBanGiay.Controllers
                 sohdb = donBan.SoHDB;
                 foreach (var item in listcart)
                 {
-                    ChiTietHDB chiTiet = new ChiTietHDB()
+                    ChiTietHDB chiTiet = new ChiTietHDB();
+                    ChiTietHDB ctexist = db.ChiTietHDBs.FirstOrDefault(x => x.SanPham.TenSP == item.SanPham.TenSP);
+                    if(ctexist != null)
                     {
-                        SoHDB = sohdb,
-                        MaSP = item.SanPham.MaSP,
-                        SoLuong = item.SoLuong
-
-                    };
+                        HoaDonBan hbexist = db.HoaDonBans.FirstOrDefault(x => x.SoHDB == ctexist.SoHDB && x.MaKhach == donBan.MaKhach);
+                        if (hbexist != null)
+                        {
+                            chiTiet.SoHDB = sohdb;
+                            chiTiet.MaSP = item.SanPham.MaSP;
+                            chiTiet.SoLuong = item.SoLuong;
+                            chiTiet.MaDG = ctexist.MaDG;
+                        }
+                        else
+                        {
+                            chiTiet.SoHDB = sohdb;
+                            chiTiet.MaSP = item.SanPham.MaSP;
+                            chiTiet.SoLuong = item.SoLuong;
+                        }
+                    }                                      
+                    else
+                    {
+                        chiTiet.SoHDB = sohdb;
+                        chiTiet.MaSP = item.SanPham.MaSP;
+                        chiTiet.SoLuong = item.SoLuong;
+                    }
                     db.ChiTietHDBs.Add(chiTiet);
                     db.SaveChanges();
                 }

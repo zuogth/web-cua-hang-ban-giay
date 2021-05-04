@@ -52,6 +52,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="404.html">Team</a></li>
                             <li><a href="@Url.Action("Shop", "Home")">Shop Now</a></li>
                             <li><a href="contact.html">Contact</a></li>
+                            @if (Session["KhachHang"] != null)
+                            {
+                                <li><a href="@Url.Action("Edit","KhachHang",new { MaKhach=Session["MaKhach"]})">@Session["KhachHang"]</a></li>
+                                <li><a href="@Url.Action("Logout","KhachHang")">Logout</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@Url.Action("Login","KhachHang")">Sign in</a></li>
+                                <li><a href="@Url.Action("Signup","KhachHang")">Sign up</a></li>
+                            }
                         </ul>
                     </nav>
                 </div>

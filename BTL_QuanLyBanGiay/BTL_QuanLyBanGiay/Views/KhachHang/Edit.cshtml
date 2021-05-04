@@ -63,7 +63,7 @@
     </div>
     <div class="options col-md-4">
         <ul>
-            <li><a href="">Thông tin cá nhân</a></li>
+            <li><a href="@Url.Action("Edit","KhachHang",new {MaKhach=Model.MaKhach })">Thông tin cá nhân</a></li>
             <li><a href="@Url.Action("HisOrder","KhachHang",new { MaKhach=Session["MaKhach"]})">Lịch sử mua hàng</a></li>
         </ul>
     </div>

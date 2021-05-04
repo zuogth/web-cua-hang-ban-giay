@@ -145,6 +145,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ChiTietHDBsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChiTietHDNsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HoaDonBansController.cs" />
     <Compile Include="Areas\Admin\Controllers\HoaDonNhapsController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhachHangsController.cs" />
@@ -496,6 +497,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
+    <Folder Include="Areas\Admin\Views\ChiTietHDNs\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Orders\" />
   </ItemGroup>

@@ -902,7 +902,7 @@
             <End Role="KhachHang" EntitySet="KhachHangs" />
             <End Role="DanhGia" EntitySet="DanhGias" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="AnhSP">
           <Key>
             <PropertyRef Name="TenSP" />
@@ -937,7 +937,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

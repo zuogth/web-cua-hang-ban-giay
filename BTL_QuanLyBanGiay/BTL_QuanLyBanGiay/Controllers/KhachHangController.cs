@@ -14,7 +14,7 @@ namespace BTL_QuanLyBanGiay.Controllers
         [HttpGet]
         public ActionResult Edit(int MaKhach)
         {
-            if(MaKhach==null)
+            if (MaKhach==null)
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
@@ -30,7 +30,11 @@ namespace BTL_QuanLyBanGiay.Controllers
         {
             if(ModelState.IsValid)
             {
-                db.Entry(kh).State = System.Data.Entity.EntityState.Modified;
+                KhachHang khachHang = db.KhachHangs.FirstOrDefault(x => x.MaKhach == kh.MaKhach);
+                khachHang.TenKhach = kh.TenKhach;
+                khachHang.DiaChi = kh.DiaChi;
+                khachHang.DienThoai = kh.DienThoai;
+                khachHang.Email = kh.Email;                
                 db.SaveChanges();
                 Session["KhachHang"] = kh.TenKhach;
             }
@@ -62,6 +66,21 @@ namespace BTL_QuanLyBanGiay.Controllers
                 danhGia.DanhGiaStar = dg.DanhGiaStar;
                 db.DanhGias.Add(danhGia);
                 db.SaveChanges();
+                List<HoaDonBan> hoaDonBans = db.HoaDonBans.Where(x => x.MaKhach == danhGia.MaKhach).ToList();
+                List<ChiTietHDB> chiTiet = new List<ChiTietHDB>();
+                foreach (var sohdb in hoaDonBans)
+                {
+                    chiTiet = db.ChiTietHDBs.Where(x => x.SoHDB == sohdb.SoHDB && x.SanPham.TenSP == dg.TenSP).ToList();
+                        
+                    if (chiTiet.Count>0)
+                    {
+                        foreach (ChiTietHDB chi in chiTiet)
+                        {
+                            chi.MaDG = danhGia.MaDG;
+                            db.SaveChanges();
+                        }
+                    }                                                  
+                }      
             }
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
