@@ -59,6 +59,16 @@
           <Property Name="MaCV" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TenCV" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="DienThoai" />
+          </Key>
+          <Property Name="DienThoai" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="DanhGia">
           <Key>
             <PropertyRef Name="MaDG" />
@@ -376,6 +386,7 @@
           <EntitySet Name="ChiTietHDN" EntityType="Self.ChiTietHDN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Co" EntityType="Self.Co" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CongViec" EntityType="Self.CongViec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DoiTuong" EntityType="Self.DoiTuong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GioSP" EntityType="Self.GioSP" Schema="dbo" store:Type="Tables" />
@@ -876,6 +887,7 @@
             <End Role="KhachHang" EntitySet="KhachHangs" />
             <End Role="HoaDonBan" EntitySet="HoaDonBans" />
           </AssociationSet>
+          <EntitySet Name="Contacts" EntityType="CuaHangBanGiayModel.Contact" />
           </EntityContainer>
         <EntityType Name="AnhSP">
           <Key>
@@ -937,6 +949,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="DienThoai" />
+          </Key>
+          <Property Name="DienThoai" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1125,6 +1147,17 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="TenKhach" ColumnName="TenKhach" />
                 <ScalarProperty Name="MaKhach" ColumnName="MaKhach" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="CuaHangBanGiayModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

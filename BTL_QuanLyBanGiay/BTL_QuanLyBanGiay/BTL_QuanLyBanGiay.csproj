@@ -181,6 +181,9 @@
     <Compile Include="Models\CongViec.cs">
       <DependentUpon>CuaHangBanGiay.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contact.cs">
+      <DependentUpon>CuaHangBanGiay.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CuaHangBanGiay.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

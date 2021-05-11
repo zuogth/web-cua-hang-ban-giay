@@ -43,5 +43,6 @@ namespace BTL_QuanLyBanGiay.Models
         public virtual DbSet<AnhSP> AnhSPs { get; set; }
         public virtual DbSet<DanhGia> DanhGias { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
     }
 }
