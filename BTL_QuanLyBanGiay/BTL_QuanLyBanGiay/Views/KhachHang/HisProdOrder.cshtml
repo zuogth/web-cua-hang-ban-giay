@@ -21,15 +21,15 @@
             {
                 <div class="options-order">
                     <a href="@Url.Action("XemChiTiet","Home",new { MaSP=item.SanPham.MaSP})" class="btnagain">Mua lần nữa</a>
-                    <a href="#" class="btnagain" id="@(result+"a")" onclick="gettensp(this)" data-tensp="@item.SanPham.TenSP" data-toggle="modal" data-target="#formdanhgiamodal">Đánh giá</a>
+                    <a class="btnagain" id="@result" onclick="gettensp(this)" data-tensp="@item.SanPham.TenSP">Đánh giá</a>
                 </div>
-                <h5 class="txtDanhgia" ><span id="@(result+"span")">Chưa đánh giá</span></h5>
+                <h5 class="txtDanhgia"><span id="@result">Chưa đánh giá</span></h5>
             }
             else
             {
                 <div class="options-order">
                     <a href="@Url.Action("XemChiTiet","Home",new { MaSP=item.SanPham.MaSP})" class="btnagain">Mua lần nữa</a>
-                    <a href="#" class="btnagain" onclick="gettensp(this)" data-tensp="@item.SanPham.TenSP" data-toggle="modal" data-target="#formreview-danhgiamodal">Xem đánh giá</a>
+                    <a class="btnagain" onclick="getmadg(this)" data-madg="@item.MaDG">Xem đánh giá</a>
                 </div>
                 <h5 class="txtDanhgia">Đã đánh giá</h5>
             }
@@ -37,6 +37,8 @@
     </div>
 
 }
+
+
 
 
 

@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Data\LoginModel.cs" />
+    <Compile Include="Code\Encryptor.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -276,6 +277,7 @@
     <Content Include="Assest\layout\css\flexslider.css" />
     <Content Include="Assest\layout\css\font-awesome.css" />
     <Content Include="Assest\layout\css\jquery-ui1.css" />
+    <Content Include="Assest\layout\css\loginuser.css" />
     <Content Include="Assest\layout\css\shopnow.css" />
     <Content Include="Assest\layout\css\style7.css" />
     <Content Include="Assest\layout\css\styles.css" />
@@ -493,6 +495,7 @@
     <Content Include="Views\KhachHang\Edit.cshtml" />
     <Content Include="Views\KhachHang\HisOrder.cshtml" />
     <Content Include="Views\KhachHang\HisProdOrder.cshtml" />
+    <Content Include="Views\KhachHang\DanhGia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

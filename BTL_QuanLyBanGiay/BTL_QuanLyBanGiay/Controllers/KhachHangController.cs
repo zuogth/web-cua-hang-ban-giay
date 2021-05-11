@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BTL_QuanLyBanGiay.Code;
 using BTL_QuanLyBanGiay.Models;
 
 namespace BTL_QuanLyBanGiay.Controllers
@@ -84,6 +85,17 @@ namespace BTL_QuanLyBanGiay.Controllers
             }
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult DanhGia(int MaDG)
+        {
+            DanhGia danhGia = db.DanhGias.SingleOrDefault(x => x.MaDG == MaDG);
+            string tensp = danhGia.TenSP;
+            string tenkhach = danhGia.KhachHang.TenKhach;
+            string ngay = string.Format("{0:dd/MM/yyyy}", danhGia.NgayDG);
+            string noidung = danhGia.NoiDung;
+            int star = (int)danhGia.DanhGiaStar;
+            return Json(new { Success=true,TenSP=tensp,TenKhach=tenkhach,NgayDG=ngay,NoiDung=noidung,Star=star},JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Login()
         {
             return View();
@@ -97,13 +109,16 @@ namespace BTL_QuanLyBanGiay.Controllers
                 ViewBag.Err = "Tài khoản không tồn tại";
                 return View();
             }
-            if(kh.Password!=khach.Password.Trim())
+            if (Encryptor.MD5Hash(kh.Password)!=khach.Password.Trim())
             {
                 ViewBag.Err = "Mật khẩu không chính xác";
                 return View();
             }
             Session["KhachHang"] = khach.TenKhach;
             Session["MaKhach"] = khach.MaKhach;
+            Session["SDT"] = khach.DienThoai;
+            Session["Email"] = khach.Email;
+            Session["DiaChi"] = khach.DiaChi;
             return RedirectToAction("Shop","Home");
         }
         public ActionResult Logout()
@@ -122,6 +137,7 @@ namespace BTL_QuanLyBanGiay.Controllers
             KhachHang khach = db.KhachHangs.SingleOrDefault(x => x.DienThoai == kh.DienThoai);
             if(khach==null)
             {
+                kh.Password = Encryptor.MD5Hash(kh.Password);
                 db.KhachHangs.Add(kh);
                 db.SaveChanges();
                 return RedirectToAction("Login");
@@ -135,7 +151,7 @@ namespace BTL_QuanLyBanGiay.Controllers
                 }
                 else
                 {
-                    khach.Password = kh.Password;
+                    khach.Password = Encryptor.MD5Hash(kh.Password);
                     db.Entry(khach).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Login");

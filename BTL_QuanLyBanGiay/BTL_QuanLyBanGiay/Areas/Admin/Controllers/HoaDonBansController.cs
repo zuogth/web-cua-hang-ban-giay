@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BTL_QuanLyBanGiay.Models;
+using PagedList;
 
 namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
 {
@@ -15,10 +16,12 @@ namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
         private CuaHangBanGiayEntities db = new CuaHangBanGiayEntities();
 
         // GET: Admin/HoaDonBans
-        public ActionResult Index()
+        public ActionResult Index(int?page)
         {
+            int pageSize = 6;
+            int pageNumber = (page??1);
             var hoaDonBans = db.HoaDonBans.Include(h => h.KhachHang);
-            return View(hoaDonBans.ToList());
+            return View(hoaDonBans.ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/HoaDonBans/Details/5

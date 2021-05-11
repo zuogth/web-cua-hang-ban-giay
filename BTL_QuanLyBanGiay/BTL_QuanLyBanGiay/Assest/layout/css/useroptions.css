@@ -63,13 +63,21 @@
     .formDanhgia-prod .checked{
         color:orange;
     }
-    .close-danhgia {
-        background: bottom;
-        border: none;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+#formdanhgiamodal, #formreview-danhgiamodal {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    z-index: 999;
+    transform: translateX(-50%);
+}
+
+.close-danhgia {
+    background: bottom;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 .input-tensp {
     width: 100%;
     padding: 5px;

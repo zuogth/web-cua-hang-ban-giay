@@ -39,11 +39,11 @@
         </ul>
     </div>
 </div>
-<div class="modal fade" id="formdanhgiamodal" role="dialog">
+<div id="formdanhgiamodal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" id="btnclose">&times;</button>
                 <h4 class="modal-title">Đánh giá sản phẩm!</h4>
             </div>
             <div class="formDanhgia-prod">
@@ -76,15 +76,29 @@
         </div>
     </div>
 </div>
+<div id="formreview-danhgiamodal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="btnclose_ed">&times;</button>
+                <h4 class="modal-title">Đã đánh giá sản phẩm!</h4>
+            </div>
+            <div class="formDanhgia-prod">
+                
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     var nameid;
     function gettensp(item) {
         var name = $(item).attr("data-tensp");
         $('input#TenSP').val(name);
         nameid = $(item).attr("id");
+        $('#formdanhgiamodal').show();
     }
     function adddanhgia(item) {
-        
+
         //Serialize the form datas.
         var valdata = $("#formDanhgia").serialize();
         //to get alert popup
@@ -95,18 +109,50 @@
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data:valdata,
             success: function (data) {
-                $('.modal-backdrop').hide();
-                $('#formdanhgiamodal').hide();               
+                $('#formdanhgiamodal').hide();
                 $('input#TenSP').val('');
                 $('input#NoiDung').val('');
                 $('input#DanhGiaStar').val('');
-                $('a#' + nameid).text('Xem đánh giá');
-                $('span#' + nameid).text('Đã đánh giá');
+                $('.options-order #' + nameid).text('Xem đánh giá');
+                $('txtDanhgia #' + nameid).text('Đã đánh giá');
+                alert("Đánh giá thành công");
             },
             error: function () {
                 alert("Đánh giá thất bại");
             }
         });
     };
+    function getmadg(item) {
+        var madg = $(item).attr("data-madg")
+        var formdata = new FormData();
+        formdata.append("MaDG", madg);
+        $('#formreview-danhgiamodal').show();
+        $('.formDanhgia-prod').html("");
+        $.ajax({
+            async: false,
+            url: "/KhachHang/DanhGia",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: formdata,
+            success: function (data) {
+                let html = `<h4>${data.TenSP}</h4>
+                <hr />
+                <h5>${data.TenKhach}</h5>
+                <i>${data.NgayDG}</i>
+                <p>`;
+                for (let i = 0; i < data.Star; i++)
+                {
+                    html += `<span class="fa fa-star checked"></span>`;
+                }
+                html += `</p>
+                        <p>Nội dung: <span>${data.NoiDung}</span></p>`;
+                $('.formDanhgia-prod').append(html);
+            },
+            error: function () {
+                alert("Đánh giá thất bại");
+            }
+        });
+    }
 </script>
 

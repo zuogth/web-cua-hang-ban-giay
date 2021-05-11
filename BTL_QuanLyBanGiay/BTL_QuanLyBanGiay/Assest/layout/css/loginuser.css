@@ -1,0 +1,13 @@
+﻿.login {
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 3px;
+}
+.input {
+    width: 60%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid;
+}

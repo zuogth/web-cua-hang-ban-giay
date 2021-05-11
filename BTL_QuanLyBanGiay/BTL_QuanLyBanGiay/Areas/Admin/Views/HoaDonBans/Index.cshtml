@@ -1,4 +1,6 @@
-﻿@model IEnumerable<BTL_QuanLyBanGiay.Models.HoaDonBan>
+﻿@using BTL_QuanLyBanGiay.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<HoaDonBan>
 
 @{
     ViewBag.active = 4;
@@ -27,27 +29,34 @@
             <th></th>
         </tr>
     </thead>
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoHDB)
-        </td>
-        <td>
-            @string.Format("{0:dd/MM/yyyy}",item.NgayBan)
-            @*@Html.DisplayFor(modelItem => item.NgayBan)*@
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.KhachHang.TenKhach)           
-        </td>
-        <td>
-            @string.Format("{0:0,00}",item.TongTien) đ
-        </td>
-        <td>
-            <a href="@Url.Action("Edit","HoaDonBans",new { id=item.SoHDB})"><i class="fa fa-edit"></i></a>
-            <a href="@Url.Action("Details","HoaDonBans",new { id=item.SoHDB})"><i class="fa fa-info-circle"></i></a>
-            <a href="@Url.Action("Delete","HoaDonBans",new { id=item.SoHDB})"><i class="fa fa-trash-o"></i></a>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoHDB)
+            </td>
+            <td>
+                @string.Format("{0:dd/MM/yyyy}", item.NgayBan)
+                @*@Html.DisplayFor(modelItem => item.NgayBan)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhachHang.TenKhach)
+            </td>
+            <td>
+                @string.Format("{0:0,00}", item.TongTien) đ
+            </td>
+            <td>
+                <a href="@Url.Action("Edit","HoaDonBans",new { id=item.SoHDB})"><i class="fa fa-edit"></i></a>
+                <a href="@Url.Action("Details","HoaDonBans",new { id=item.SoHDB})"><i class="fa fa-info-circle"></i></a>
+                <a href="@Url.Action("Delete","HoaDonBans",new { id=item.SoHDB})"><i class="fa fa-trash-o"></i></a>
+            </td>
+        </tr>
+    }
 
 </table>
+@if (Model.PageCount > 1)
+{
+    <div class="menuPage">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+}

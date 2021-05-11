@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="CuaHangBanGiayModel.GioSP" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="CuaHangBanGiayModel.HoaDonBan" Width="1.5" PointX="3" PointY="22.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CuaHangBanGiayModel.HoaDonNhap" Width="1.5" PointX="6" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CuaHangBanGiayModel.KhachHang" Width="1.5" PointX="0.75" PointY="22.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CuaHangBanGiayModel.Mau" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CuaHangBanGiayModel.NhaCungCap" Width="1.5" PointX="3.75" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CuaHangBanGiayModel.NhanVien" Width="1.5" PointX="3.75" PointY="18.625" IsExpanded="true" />
@@ -30,15 +29,16 @@
         <AssociationConnector Association="CuaHangBanGiayModel.FK_NhanVien_CongViec" ManuallyRouted="false" />
         <AssociationConnector Association="CuaHangBanGiayModel.FK_SanPham_DoiTuong" ManuallyRouted="false" />
         <AssociationConnector Association="CuaHangBanGiayModel.FK_GioSP_SanPham" ManuallyRouted="false" />
-        <AssociationConnector Association="CuaHangBanGiayModel.FK_KhachHang_HoaDonBan" ManuallyRouted="false" />
         <AssociationConnector Association="CuaHangBanGiayModel.FK_HoaDonNhap_NhaCungCap" ManuallyRouted="false" />
         <AssociationConnector Association="CuaHangBanGiayModel.FK_HoaDonNhap_NhanVien" ManuallyRouted="false" />
         <AssociationConnector Association="CuaHangBanGiayModel.FK_SanPham_Mau" ManuallyRouted="false" />
         <AssociationConnector Association="CuaHangBanGiayModel.FK_SanPham_NuocSanXuat" ManuallyRouted="false" />
         <AssociationConnector Association="CuaHangBanGiayModel.FK_SanPham_TheLoai" ManuallyRouted="false" />
         <EntityTypeShape EntityType="CuaHangBanGiayModel.AnhSP" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="CuaHangBanGiayModel.DanhGia" Width="1.5" PointX="3" PointY="25.75" />
+        <EntityTypeShape EntityType="CuaHangBanGiayModel.DanhGia" Width="1.5" PointX="3" PointY="26.375" />
+        <EntityTypeShape EntityType="CuaHangBanGiayModel.KhachHang" Width="1.5" PointX="0.75" PointY="22.25" />
         <AssociationConnector Association="CuaHangBanGiayModel.FK_DanhGia_KhachHang" />
+        <AssociationConnector Association="CuaHangBanGiayModel.FK_KhachHang_HoaDonBan" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

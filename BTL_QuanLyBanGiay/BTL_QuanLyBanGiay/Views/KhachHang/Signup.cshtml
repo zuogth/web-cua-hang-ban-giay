@@ -3,8 +3,8 @@
     ViewBag.Title = "Signup";
     Layout = "~/Views/_Layout.cshtml";
 }
-
-<h2>Signup</h2>
+<link href="~/Assest/layout/css/loginuser.css" rel="stylesheet" />
+<div class="login">
 @if (ViewBag.Err != null)
 {
     <h5>@ViewBag.Err</h5>
@@ -12,13 +12,17 @@
 @using (Html.BeginForm("Signup", "KhachHang", FormMethod.Post))
 {
     <div>
-        <input type="tel" id="DienThoai" name="DienThoai" placeholder="Số điện thoại" required />
+        <input class="input" type="text" id="TenKhach" name="TenKhach" placeholder="Họ và tên" required />
     </div>
     <div>
-        <input type="password" id="Password" name="Password" placeholder="Mật khẩu" required />
+        <input class="input" type="tel" id="DienThoai" name="DienThoai" placeholder="Số điện thoại" required />
+    </div>
+    <div>
+        <input class="input" type="password" id="Password" name="Password" placeholder="Mật khẩu" required />
     </div>
     <div>
         <button type="submit">Sign up</button>
     </div>
+    <a href="@Url.Action("Login","KhachHang")">Login?</a>
 }
-
+</div>

@@ -115,7 +115,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="DienThoai" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
-          <Property Name="Password" Type="nchar" MaxLength="20" />
+          <Property Name="Password" Type="nchar" MaxLength="100" />
           <Property Name="GioiTinh" Type="nchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="Mau">
@@ -536,7 +536,7 @@
           <Property Name="NgayBan" Type="DateTime" Precision="3" />
           <Property Name="TongTien" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="ChiTietHDBs" Relationship="Self.FK_ChiTietHDB_HoaDonBan" FromRole="HoaDonBan" ToRole="ChiTietHDB" />
-          <NavigationProperty Name="KhachHang" Relationship="Self.FK_KhachHang_HoaDonBan" FromRole="HoaDonBan" ToRole="KhachHang" />
+          <NavigationProperty Name="KhachHang" Relationship="CuaHangBanGiayModel.FK_KhachHang_HoaDonBan" FromRole="HoaDonBan" ToRole="KhachHang" />
         </EntityType>
         <EntityType Name="HoaDonNhap">
           <Key>
@@ -550,20 +550,6 @@
           <NavigationProperty Name="ChiTietHDNs" Relationship="Self.FK_ChiTietHDN_HoaDonNhap" FromRole="HoaDonNhap" ToRole="ChiTietHDN" />
           <NavigationProperty Name="NhaCungCap" Relationship="Self.FK_HoaDonNhap_NhaCungCap" FromRole="HoaDonNhap" ToRole="NhaCungCap" />
           <NavigationProperty Name="NhanVien" Relationship="Self.FK_HoaDonNhap_NhanVien" FromRole="HoaDonNhap" ToRole="NhanVien" />
-        </EntityType>
-        <EntityType Name="KhachHang">
-          <Key>
-            <PropertyRef Name="MaKhach" />
-          </Key>
-          <Property Name="MaKhach" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenKhach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="HoaDonBans" Relationship="Self.FK_KhachHang_HoaDonBan" FromRole="KhachHang" ToRole="HoaDonBan" />
-          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="GioiTinh" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="DanhGias" Relationship="CuaHangBanGiayModel.FK_DanhGia_KhachHang" FromRole="KhachHang" ToRole="DanhGia" />
         </EntityType>
         <EntityType Name="Mau">
           <Key>
@@ -747,18 +733,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_KhachHang_HoaDonBan">
-          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
-          <End Role="HoaDonBan" Type="Self.HoaDonBan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KhachHang">
-              <PropertyRef Name="MaKhach" />
-            </Principal>
-            <Dependent Role="HoaDonBan">
-              <PropertyRef Name="MaKhach" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_HoaDonNhap_NhaCungCap">
           <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="1" />
           <End Role="HoaDonNhap" Type="Self.HoaDonNhap" Multiplicity="*" />
@@ -829,7 +803,6 @@
           <EntitySet Name="GioSPs" EntityType="Self.GioSP" />
           <EntitySet Name="HoaDonBans" EntityType="Self.HoaDonBan" />
           <EntitySet Name="HoaDonNhaps" EntityType="Self.HoaDonNhap" />
-          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
           <EntitySet Name="Maus" EntityType="Self.Mau" />
           <EntitySet Name="NhaCungCaps" EntityType="Self.NhaCungCap" />
           <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
@@ -872,10 +845,6 @@
             <End Role="SanPham" EntitySet="SanPhams" />
             <End Role="GioSP" EntitySet="GioSPs" />
           </AssociationSet>
-          <AssociationSet Name="FK_KhachHang_HoaDonBan" Association="Self.FK_KhachHang_HoaDonBan">
-            <End Role="KhachHang" EntitySet="KhachHangs" />
-            <End Role="HoaDonBan" EntitySet="HoaDonBans" />
-          </AssociationSet>
           <AssociationSet Name="FK_HoaDonNhap_NhaCungCap" Association="Self.FK_HoaDonNhap_NhaCungCap">
             <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
             <End Role="HoaDonNhap" EntitySet="HoaDonNhaps" />
@@ -898,9 +867,14 @@
           </AssociationSet>
           <EntitySet Name="AnhSPs" EntityType="CuaHangBanGiayModel.AnhSP" />
           <EntitySet Name="DanhGias" EntityType="CuaHangBanGiayModel.DanhGia" />
+          <EntitySet Name="KhachHangs" EntityType="CuaHangBanGiayModel.KhachHang" />
           <AssociationSet Name="FK_DanhGia_KhachHang" Association="CuaHangBanGiayModel.FK_DanhGia_KhachHang">
             <End Role="KhachHang" EntitySet="KhachHangs" />
             <End Role="DanhGia" EntitySet="DanhGias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhachHang_HoaDonBan" Association="CuaHangBanGiayModel.FK_KhachHang_HoaDonBan">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="HoaDonBan" EntitySet="HoaDonBans" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AnhSP">
@@ -925,6 +899,20 @@
           <Property Name="DanhGiaStar" Type="Int32" />
           <NavigationProperty Name="KhachHang" Relationship="CuaHangBanGiayModel.FK_DanhGia_KhachHang" FromRole="DanhGia" ToRole="KhachHang" />
         </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="MaKhach" />
+          </Key>
+          <Property Name="MaKhach" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenKhach" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="GioiTinh" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="DanhGias" Relationship="CuaHangBanGiayModel.FK_DanhGia_KhachHang" FromRole="KhachHang" ToRole="DanhGia" />
+          <NavigationProperty Name="HoaDonBans" Relationship="CuaHangBanGiayModel.FK_KhachHang_HoaDonBan" FromRole="KhachHang" ToRole="HoaDonBan" />
+        </EntityType>
         <Association Name="FK_DanhGia_KhachHang">
           <End Type="CuaHangBanGiayModel.KhachHang" Role="KhachHang" Multiplicity="1" />
           <End Type="CuaHangBanGiayModel.DanhGia" Role="DanhGia" Multiplicity="*" />
@@ -933,6 +921,18 @@
               <PropertyRef Name="MaKhach" />
             </Principal>
             <Dependent Role="DanhGia">
+              <PropertyRef Name="MaKhach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhachHang_HoaDonBan">
+          <End Type="CuaHangBanGiayModel.KhachHang" Role="KhachHang" Multiplicity="1" />
+          <End Type="CuaHangBanGiayModel.HoaDonBan" Role="HoaDonBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="MaKhach" />
+            </Principal>
+            <Dependent Role="HoaDonBan">
               <PropertyRef Name="MaKhach" />
             </Dependent>
           </ReferentialConstraint>
@@ -1029,19 +1029,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="KhachHangs">
-            <EntityTypeMapping TypeName="CuaHangBanGiayModel.KhachHang">
-              <MappingFragment StoreEntitySet="KhachHang">
-                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="MaKhach" ColumnName="MaKhach" />
-                <ScalarProperty Name="TenKhach" ColumnName="TenKhach" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Maus">
             <EntityTypeMapping TypeName="CuaHangBanGiayModel.Mau">
               <MappingFragment StoreEntitySet="Mau">
@@ -1125,6 +1112,19 @@
                 <ScalarProperty Name="MaKhach" ColumnName="MaKhach" />
                 <ScalarProperty Name="TenSP" ColumnName="TenSP" />
                 <ScalarProperty Name="MaDG" ColumnName="MaDG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="CuaHangBanGiayModel.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TenKhach" ColumnName="TenKhach" />
+                <ScalarProperty Name="MaKhach" ColumnName="MaKhach" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

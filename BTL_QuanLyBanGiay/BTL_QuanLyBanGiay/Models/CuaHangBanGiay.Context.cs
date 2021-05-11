@@ -34,7 +34,6 @@ namespace BTL_QuanLyBanGiay.Models
         public virtual DbSet<GioSP> GioSPs { get; set; }
         public virtual DbSet<HoaDonBan> HoaDonBans { get; set; }
         public virtual DbSet<HoaDonNhap> HoaDonNhaps { get; set; }
-        public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<Mau> Maus { get; set; }
         public virtual DbSet<NhaCungCap> NhaCungCaps { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
@@ -43,5 +42,6 @@ namespace BTL_QuanLyBanGiay.Models
         public virtual DbSet<TheLoai> TheLoais { get; set; }
         public virtual DbSet<AnhSP> AnhSPs { get; set; }
         public virtual DbSet<DanhGia> DanhGias { get; set; }
+        public virtual DbSet<KhachHang> KhachHangs { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BTL_QuanLyBanGiay.Areas.Admin.Data;
+using BTL_QuanLyBanGiay.Code;
 using ModelWeb.Framework;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
                     ViewBag.Err = "Tài khoản không tồn tại";
                     return View();
                 }
-                if (user.PassWord.Trim() != loginModel.PassWord)
+                if (user.PassWord.Trim() != Encryptor.MD5Hash(loginModel.PassWord))
                 {
                     ViewBag.Err = "Sai mật khẩu";
                     return View();
@@ -50,7 +51,7 @@ namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
                     var user = context.TaiKhoans.Add(new TaiKhoan
                     {
                         UserName = loginModel.UserName,
-                        PassWord = loginModel.PassWord
+                        PassWord =Encryptor.MD5Hash(loginModel.PassWord)
                     });
                     context.SaveChanges();
                     return RedirectToAction("Login");

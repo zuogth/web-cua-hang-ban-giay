@@ -435,6 +435,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         $(document).ready(function () {
             let masp = $('h3#tenSP').attr("masp");
             $('a#' + masp).css('background', 'black').css('color', '#fff');
+            $('#formdanhgiamodal').hide();
+            $('#formreview-danhgiamodal').hide();
+            $('#btnclose').click(function () {
+                $('#formdanhgiamodal').hide();
+            });
+            $('#btnclose_ed').click(function () {
+                $('#formreview-danhgiamodal').hide();
+            });
         });
     </script>
 </body>
