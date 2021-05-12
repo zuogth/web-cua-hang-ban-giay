@@ -54,6 +54,18 @@
     <Property Name="MaCV" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="TenCV" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="MaContact" />
+    </Key>
+    <Property Name="MaContact" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DienThoai" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+    <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
+    <Property Name="Comfirm" Type="int" />
+  </EntityType>
   <EntityType Name="DanhGia">
     <Key>
       <PropertyRef Name="MaDG" />
@@ -71,16 +83,6 @@
     </Key>
     <Property Name="MaDoiTuong" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="TenDoiTuong" Type="nvarchar" MaxLength="50" Nullable="false" />
-  </EntityType>
-  <EntityType Name="GioSP">
-    <Key>
-      <PropertyRef Name="MaGH" />
-      <PropertyRef Name="MaSP" />
-    </Key>
-    <Property Name="MaGH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MaSP" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="SoLuong" Type="int" />
-    <Property Name="Gia" Type="money" />
   </EntityType>
   <EntityType Name="HoaDonBan">
     <Key>
@@ -232,18 +234,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_GioSP_SanPham">
-    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-    <End Role="GioSP" Type="Self.GioSP" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SanPham">
-        <PropertyRef Name="MaSP" />
-      </Principal>
-      <Dependent Role="GioSP">
-        <PropertyRef Name="MaSP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_HoaDonNhap_NhaCungCap">
     <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="1" />
     <End Role="HoaDonNhap" Type="Self.HoaDonNhap" Multiplicity="*" />
@@ -371,9 +361,9 @@
     <EntitySet Name="ChiTietHDN" EntityType="Self.ChiTietHDN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Co" EntityType="Self.Co" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CongViec" EntityType="Self.CongViec" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DoiTuong" EntityType="Self.DoiTuong" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="GioSP" EntityType="Self.GioSP" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HoaDonBan" EntityType="Self.HoaDonBan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HoaDonNhap" EntityType="Self.HoaDonNhap" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
@@ -402,10 +392,6 @@
     <AssociationSet Name="FK_DanhGia_KhachHang" Association="Self.FK_DanhGia_KhachHang">
       <End Role="KhachHang" EntitySet="KhachHang" />
       <End Role="DanhGia" EntitySet="DanhGia" />
-    </AssociationSet>
-    <AssociationSet Name="FK_GioSP_SanPham" Association="Self.FK_GioSP_SanPham">
-      <End Role="SanPham" EntitySet="SanPham" />
-      <End Role="GioSP" EntitySet="GioSP" />
     </AssociationSet>
     <AssociationSet Name="FK_HoaDonNhap_NhaCungCap" Association="Self.FK_HoaDonNhap_NhaCungCap">
       <End Role="NhaCungCap" EntitySet="NhaCungCap" />

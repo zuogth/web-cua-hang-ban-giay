@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BTL_QuanLyBanGiay.Models.ChiTietHDN>
+<link href="~/Assest/admin/css/table-admin.css" rel="stylesheet" />
+<p>
+    <a href="@Url.Action("Create","ChiTietHDNs")" class="btn btn-default"><i class="fa fa-plus"></i>Create</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Mã sản phẩm
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Đơn Giá
+            </th>
+            <th>
+                Thành tiền
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SanPham.MaSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SanPham.TenSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @string.Format("{0:0,00}",item.DonGia) đ
+                </td>
+                <td>
+                    @string.Format("{0:0,00}", item.ThanhTien) đ
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete","ChiTietHDNs",new { SoHDN=item.SoHDN,MaSP=item.MaSP})"><i class="fa fa-trash-o"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

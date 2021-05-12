@@ -11,7 +11,7 @@ using PagedList;
 
 namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
 {
-    public class NhanViensController : Controller
+    public class NhanViensController : BaseController
     {
         private CuaHangBanGiayEntities db = new CuaHangBanGiayEntities();
 

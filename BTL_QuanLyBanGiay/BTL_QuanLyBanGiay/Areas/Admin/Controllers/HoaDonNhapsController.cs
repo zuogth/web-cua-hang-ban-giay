@@ -10,7 +10,7 @@ using BTL_QuanLyBanGiay.Models;
 
 namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
 {
-    public class HoaDonNhapsController : Controller
+    public class HoaDonNhapsController : BaseController
     {
         private CuaHangBanGiayEntities db = new CuaHangBanGiayEntities();
 

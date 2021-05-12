@@ -10,102 +10,54 @@ using BTL_QuanLyBanGiay.Models;
 
 namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
 {
-    public class ChiTietHDNsController : Controller
+    public class ChiTietHDNsController : BaseController
     {
         private CuaHangBanGiayEntities db = new CuaHangBanGiayEntities();
 
         // GET: Admin/ChiTietHDNs
-        public ActionResult Index()
+        public PartialViewResult Index(string id)
         {
-            var chiTietHDNs = db.ChiTietHDNs.Include(c => c.HoaDonNhap).Include(c => c.SanPham);
-            return View(chiTietHDNs.ToList());
+            List<ChiTietHDN> lst = db.ChiTietHDNs.Where(x => x.SoHDN == id).OrderBy(x => x.MaSP).ToList();
+            return PartialView(lst);
         }
 
-        // GET: Admin/ChiTietHDNs/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ChiTietHDN chiTietHDN = db.ChiTietHDNs.Find(id);
-            if (chiTietHDN == null)
-            {
-                return HttpNotFound();
-            }
-            return View(chiTietHDN);
-        }
-
-        // GET: Admin/ChiTietHDNs/Create
+        // GET: Admin/ChiTietHDBs/Create
         public ActionResult Create()
         {
-            ViewBag.SoHDN = new SelectList(db.HoaDonNhaps, "SoHDN", "MaNV");
             ViewBag.MaSP = new SelectList(db.SanPhams, "MaSP", "TenSP");
             return View();
         }
 
-        // POST: Admin/ChiTietHDNs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SoHDN,MaSP,SoLuong,DonGia,GiamGia,ThanhTien")] ChiTietHDN chiTietHDN)
         {
             if (ModelState.IsValid)
             {
-                db.ChiTietHDNs.Add(chiTietHDN);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (db.ChiTietHDNs.Find(chiTietHDN.SoHDN, chiTietHDN.MaSP) != null)
+                {
+                    ViewBag.Err = "Sản phẩm đã tồn tại";
+                }
+                else
+                {
+                    db.ChiTietHDNs.Add(chiTietHDN);
+                    db.SaveChanges();
+                    return RedirectToAction("Details", "HoaDonNhaps", new { id = chiTietHDN.SoHDN });
+                }
             }
-
-            ViewBag.SoHDN = new SelectList(db.HoaDonNhaps, "SoHDN", "MaNV", chiTietHDN.SoHDN);
             ViewBag.MaSP = new SelectList(db.SanPhams, "MaSP", "TenSP", chiTietHDN.MaSP);
             return View(chiTietHDN);
         }
 
-        // GET: Admin/ChiTietHDNs/Edit/5
-        public ActionResult Edit(string id)
+        // GET: Admin/ChiTietHDBs/Delete/5
+        public ActionResult Delete(string SoHDN, string MaSP)
         {
-            if (id == null)
+            if (MaSP == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ChiTietHDN chiTietHDN = db.ChiTietHDNs.Find(id);
-            if (chiTietHDN == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.SoHDN = new SelectList(db.HoaDonNhaps, "SoHDN", "MaNV", chiTietHDN.SoHDN);
-            ViewBag.MaSP = new SelectList(db.SanPhams, "MaSP", "TenSP", chiTietHDN.MaSP);
-            return View(chiTietHDN);
-        }
-
-        // POST: Admin/ChiTietHDNs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SoHDN,MaSP,SoLuong,DonGia,GiamGia,ThanhTien")] ChiTietHDN chiTietHDN)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(chiTietHDN).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.SoHDN = new SelectList(db.HoaDonNhaps, "SoHDN", "MaNV", chiTietHDN.SoHDN);
-            ViewBag.MaSP = new SelectList(db.SanPhams, "MaSP", "TenSP", chiTietHDN.MaSP);
-            return View(chiTietHDN);
-        }
-
-        // GET: Admin/ChiTietHDNs/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ChiTietHDN chiTietHDN = db.ChiTietHDNs.Find(id);
+            ChiTietHDN chiTietHDN = db.ChiTietHDNs.Find(SoHDN, MaSP);
             if (chiTietHDN == null)
             {
                 return HttpNotFound();
@@ -113,24 +65,15 @@ namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
             return View(chiTietHDN);
         }
 
-        // POST: Admin/ChiTietHDNs/Delete/5
+        // POST: Admin/ChiTietHDBs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string SoHDN, string MaSP)
         {
-            ChiTietHDN chiTietHDN = db.ChiTietHDNs.Find(id);
+            ChiTietHDN chiTietHDN = db.ChiTietHDNs.Find(SoHDN, MaSP);
             db.ChiTietHDNs.Remove(chiTietHDN);
             db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return RedirectToAction("Details", "HoaDonNhaps", new { id = chiTietHDN.SoHDN });
         }
     }
 }

@@ -59,17 +59,6 @@
     <Property Name="TenDoiTuong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="SanPhams" Relationship="Self.FK_SanPham_DoiTuong" FromRole="DoiTuong" ToRole="SanPham" />
   </EntityType>
-  <EntityType Name="GioSP">
-    <Key>
-      <PropertyRef Name="MaGH" />
-      <PropertyRef Name="MaSP" />
-    </Key>
-    <Property Name="MaGH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaSP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="SoLuong" Type="Int32" />
-    <Property Name="Gia" Type="Decimal" Precision="19" Scale="4" />
-    <NavigationProperty Name="SanPham" Relationship="Self.FK_GioSP_SanPham" FromRole="GioSP" ToRole="SanPham" />
-  </EntityType>
   <EntityType Name="HoaDonBan">
     <Key>
       <PropertyRef Name="SoHDB" />
@@ -155,7 +144,6 @@
     <NavigationProperty Name="ChiTietHDNs" Relationship="Self.FK_ChiTietHDN_SanPham" FromRole="SanPham" ToRole="ChiTietHDN" />
     <NavigationProperty Name="Co" Relationship="Self.FK_SanPham_Co" FromRole="SanPham" ToRole="Co" />
     <NavigationProperty Name="DoiTuong" Relationship="Self.FK_SanPham_DoiTuong" FromRole="SanPham" ToRole="DoiTuong" />
-    <NavigationProperty Name="GioSPs" Relationship="Self.FK_GioSP_SanPham" FromRole="SanPham" ToRole="GioSP" />
     <NavigationProperty Name="Mau" Relationship="Self.FK_SanPham_Mau" FromRole="SanPham" ToRole="Mau" />
     <NavigationProperty Name="NuocSanXuat" Relationship="Self.FK_SanPham_NuocSanXuat" FromRole="SanPham" ToRole="NuocSanXuat" />
     <NavigationProperty Name="TheLoai" Relationship="Self.FK_SanPham_TheLoai" FromRole="SanPham" ToRole="TheLoai" />
@@ -264,18 +252,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_GioSP_SanPham">
-    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-    <End Role="GioSP" Type="Self.GioSP" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SanPham">
-        <PropertyRef Name="MaSP" />
-      </Principal>
-      <Dependent Role="GioSP">
-        <PropertyRef Name="MaSP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_HoaDonNhap_NhaCungCap">
     <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="1" />
     <End Role="HoaDonNhap" Type="Self.HoaDonNhap" Multiplicity="*" />
@@ -343,7 +319,6 @@
     <EntitySet Name="Coes" EntityType="Self.Co" />
     <EntitySet Name="CongViecs" EntityType="Self.CongViec" />
     <EntitySet Name="DoiTuongs" EntityType="Self.DoiTuong" />
-    <EntitySet Name="GioSPs" EntityType="Self.GioSP" />
     <EntitySet Name="HoaDonBans" EntityType="Self.HoaDonBan" />
     <EntitySet Name="HoaDonNhaps" EntityType="Self.HoaDonNhap" />
     <EntitySet Name="Maus" EntityType="Self.Mau" />
@@ -384,10 +359,6 @@
       <End Role="DoiTuong" EntitySet="DoiTuongs" />
       <End Role="SanPham" EntitySet="SanPhams" />
     </AssociationSet>
-    <AssociationSet Name="FK_GioSP_SanPham" Association="Self.FK_GioSP_SanPham">
-      <End Role="SanPham" EntitySet="SanPhams" />
-      <End Role="GioSP" EntitySet="GioSPs" />
-    </AssociationSet>
     <AssociationSet Name="FK_HoaDonNhap_NhaCungCap" Association="Self.FK_HoaDonNhap_NhaCungCap">
       <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
       <End Role="HoaDonNhap" EntitySet="HoaDonNhaps" />
@@ -419,6 +390,7 @@
       <End Role="KhachHang" EntitySet="KhachHangs" />
       <End Role="HoaDonBan" EntitySet="HoaDonBans" />
     </AssociationSet>
+    <EntitySet Name="Contacts" EntityType="CuaHangBanGiayModel.Contact" />
   </EntityContainer>
   <EntityType Name="AnhSP">
     <Key>
@@ -480,4 +452,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="MaContact" />
+    </Key>
+    <Property Name="MaContact" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DienThoai" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Comfirm" Type="Int32" />
+  </EntityType>
 </Schema>

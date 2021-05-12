@@ -1,5 +1,5 @@
 
-.contact_grid_right input[type="text"], .contact_grid_right input[type="email"], .contact_grid_right textarea {
+.contact_grid_right .input-contact {
     outline: none;
     padding: 15px 15px;
     font-size: 14px;
@@ -9,9 +9,7 @@
     letter-spacing: 1px;
     border: none;
     border: 1px solid #ddd;
-}
-.contact_grid_right input[type="text"]:nth-child(2), .contact_grid_right input[type="email"] {
-    margin: 1em 0 0;
+    margin-bottom:1em;
 }
 .contact_grid_right textarea {
     min-height: 150px;
@@ -19,7 +17,7 @@
     width: 95.3% !important;
     resize: none;
 }
-.contact_grid_right input[type="submit"], .contact_grid_right input[type="reset"] {
+.contact_grid_right .input-btn {
     outline: none;
     padding: 15px 0;
     font-size: 14px;
@@ -64,9 +62,6 @@
     border: 4px solid #383737;
     color: #fb383b;
     border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -o-border-radius: 50%;
 }
 .mail-us {
     margin: 1.5em 0;
@@ -81,12 +76,6 @@
     padding-left: 16px;
     letter-spacing: 1px;
     font-weight: 700;
-}
-.map {
-    -webkit-filter: grayscale(100%);
-    -moz-filter: grayscale(100%);
-    -ms-filter: grayscale(100%);
-    -o-filter: grayscale(100%);
 }
 .contact-map iframe {
     width: 100%;

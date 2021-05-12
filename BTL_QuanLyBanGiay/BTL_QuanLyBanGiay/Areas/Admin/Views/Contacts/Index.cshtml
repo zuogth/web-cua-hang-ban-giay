@@ -1,0 +1,32 @@
+﻿@model BTL_QuanLyBanGiay.Models.Contact
+@{
+    ViewBag.active = 7;
+    ViewBag.Title = "Phản hồi";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="~/Assest/admin/css/contact-cf.css" rel="stylesheet" />
+<div class="form-comfirm">
+    @using(Html.BeginForm("SendMail","Contacts",FormMethod.Post))
+    { 
+        <div>
+            <input class="input-txt" type="email" name="From" id="From" required placeholder="From..." />
+        </div>
+        <div>
+            <input class="input-txt" type="password" name="Password" id="Password" required placeholder="Password" />
+        </div>
+        <div>
+            <input class="input-txt" type="email" name="To" id="To" readonly value="@Html.DisplayFor(model=>model.Email)"/>
+        </div>
+        <div>
+            <input class="input-txt" type="text" name="Subject" id="Subject" required placeholder="Subject..." />
+        </div>
+        <div>
+            <textarea name="Body" id="Body" placeholder="Message..."></textarea>
+        </div>
+        <div>
+            <input class="btn btn-default" type="submit" value="Submit" />
+        </div>
+    }
+
+</div>
+<a href="@Url.Action("Contacts","Contacts")" class="btn btn-default">Back</a>

@@ -1,0 +1,19 @@
+﻿.form-comfirm {
+    width: 60%;
+    margin: auto;
+    text-align:center;
+}
+.form-comfirm input.input-txt{
+    width:80%;
+    margin:0.5em 0;
+    padding:0.5em;
+    border-radius:5px;
+    border:1px solid;
+}
+.form-comfirm textarea{
+    width:80%;
+    resize:none;
+    height:10em;
+    border:1px solid;
+    border-radius:5px;
+}

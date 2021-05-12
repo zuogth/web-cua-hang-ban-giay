@@ -49,9 +49,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul>
                             <li><a href="@Url.Action("Index", "Home")">Home</a></li>
                             <li><a href="@Url.Action("About", "Home")">About</a></li>
-                            <li><a href="404.html">Team</a></li>
                             <li><a href="@Url.Action("Shop", "Home")">Shop Now</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="@Url.Action("AddContact", "Contact")">Contact</a></li>
                             @if (Session["KhachHang"] != null)
                             {
                                 <li><a href="@Url.Action("Edit","KhachHang",new { MaKhach=Session["MaKhach"]})">@Session["KhachHang"]</a></li>
@@ -342,19 +341,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <!--//banner -->
         <!-- /newsletter-->
-        <div class="newsletter_w3layouts_agile">
-            <div class="col-sm-6 newsleft">
-                <h3>Sign up for Newsletter !</h3>
-            </div>
-            <div class="col-sm-6 newsright">
-                <form action="#" method="post">
-                    <input type="email" placeholder="Enter your email..." name="email" required="">
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
-
-            <div class="clearfix"></div>
-        </div>
+       
         <!-- //newsletter-->
         <!-- footer -->
         <div class="footer_agileinfo_w3">
@@ -394,11 +381,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="col-md-4 sign-gd">
                             <h4>Our <span>Information</span> </h4>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="404.html">Services</a></li>
-                                <li><a href="404.html">Short Codes</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="@Url.Action("Shop","Home")">Shop</a></li>
+                                <li><a href="@Url.Action("About","Home")">About</a></li>
+                                <li><a href="@Url.Action("AddContact","Contact")">Contact</a></li>
                             </ul>
                         </div>
 
@@ -411,7 +396,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     </div>
                                     <div class="address-right">
                                         <h6>Phone Number</h6>
-                                        <p>+1 234 567 8901</p>
+                                        <p>(+84) 834 633 431</p>
                                     </div>
                                     <div class="clearfix"> </div>
                                 </div>
@@ -421,7 +406,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     </div>
                                     <div class="address-right">
                                         <h6>Email Address</h6>
-                                        <p>Email :<a href="mailto:example@email.com"> mail@example.com</a></p>
+                                        <p>Email :<a href="mailto:tuanhieu342000@gmail.com"> tuanhieu342000@gmail.com</a></p>
                                     </div>
                                     <div class="clearfix"> </div>
                                 </div>
@@ -432,7 +417,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <div class="address-right">
                                         <h6>Location</h6>
                                         <p>
-                                            Broome St, NY 10002,California, USA.
+                                            3 Cau Giay, Ngoc Khanh, Dong Da, Hanoi, Vietnam.
 
                                         </p>
                                     </div>
@@ -459,7 +444,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div class="clearfix"></div>
 
-                <p class="copy-right-w3ls-agileits">&copy 2018 Downy Shoes. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+                <p class="copy-right-w3ls-agileits">&copy 2021 Downy Shoes. All rights reserved</p>
             </div>
         </div>
         <!-- //footer -->

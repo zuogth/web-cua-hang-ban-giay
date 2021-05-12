@@ -4,153 +4,26 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 <link href="~/Assest/layout/css/loginuser.css" rel="stylesheet" />
-<div class="login">
-    @if (ViewBag.Err != null)
-    {
-        <h5>@ViewBag.Err</h5>
-    }
-    @using (Html.BeginForm("Login", "KhachHang"))
-    {
-        <div>
-            @Html.TextBoxFor(x => x.DienThoai, new { @class = "input", @placeholder = "Số điện thoại" })
-        </div>
-        <div>
-            @Html.PasswordFor(x => x.Password, new { @class = "input", @placeholder = "Mật khẩu" })
-        </div>
-        <div>
-            <div class="container" style="width:100%">
-                <a id="logout" href="#" onclick="logout()">Logout</a>
-                <fb:login-button id="fb-btn"
-                                 scope="public_profile,email,user_birthday,user_location,user_posts,user_photos,user_link,user_photos,user_posts"
-                                 onlogin="checkLoginState();">
-                </fb:login-button>
-
+<div class="bg-login-regis">
+    <div class="login">
+        @if (ViewBag.Err != null)
+        {
+            <h5>@ViewBag.Err</h5>
+        }
+        @using (Html.BeginForm("Login", "KhachHang"))
+        {
+            <div>
+                @Html.TextBoxFor(x => x.DienThoai, new { @class = "input", @placeholder = "Số điện thoại" })
             </div>
-
-            <div class="container" style="width:100%">
-                <h3 id="heading"></h3>
-                <div id="profile"></div>
-                <div id="feed"></div>
+            <div>
+                @Html.PasswordFor(x => x.Password, new { @class = "input", @placeholder = "Mật khẩu" })
             </div>
-        </div>
-        <div>
-            <button type="submit">Login</button>
-        </div>
-        <a href="@Url.Action("Signup","KhachHang")">Sign up?</a>
-    }
+            <div>
+                <button type="submit" class="btn btn-default">Login</button>
+            </div>
+            <a href="@Url.Action("Signup","KhachHang")">Sign up?</a>
+        }
+    </div>
 </div>
-<script>
 
-
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) { return; }
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '529899434838260',
-            cookie: true,
-            xfbml: true,
-            version: 'v10.0'
-        });
-
-        FB.getLoginStatus(function (response) {
-            statusChangeCallback(response);
-        });
-    };
-
-
-
-    function statusChangeCallback(response) {
-        if (response.status === 'connected') {
-            setElements(true);
-            testAPI();
-        } else {
-            setElements(false);//da dang nhap fb nhung chua dang nhap ung dung
-        }
-    }
-
-    function checkLoginState() {
-        FB.getLoginStatus(function (response) {
-            statusChangeCallback(response);
-        });
-    }
-
-    function testAPI() {
-        FB.api('/me?fields=name,email,birthday,last_name,location,picture', function (response) {
-            if (response && !response.error) {
-                buildProfile(response);
-            }
-
-
-            FB.api('/me/feed?fields=message,picture,created_time', function (response) {
-                if (response && !response.error) {
-                    buildFeed(response);
-                }
-            });
-
-
-        })
-    }
-
-    function buildProfile(user) {
-        let profile = `
-          <h3>${user.name}</h3>
-          <ul class="list-group">
-            <li class="list-group-item">User ID: ${user.id}</li>
-            <li class="list-group-item">Email: ${user.email}</li>
-            <li class="list-group-item">Birthday: ${user.birthday}</li>
-            <li class="list-group-item">Address: ${user.location.name}</li>\
-            <li class="list-group-item">User last name: ${user.last_name}</li>
-            <li class="list-group-item">Avatar:<img src="${user.picture.data.url}"></li>
-
-          </ul>
-        `;
-        document.getElementById('profile').innerHTML = profile;
-    }
-
-    function buildFeed(feed) {
-        let output = '<h3>Posts</h3>';
-        for (let i in feed.data) {
-            if (feed.data[i].message) {
-
-                output += `
-              <div class="well">
-                ${'Nội dung: ' + feed.data[i].message} <span> ' Thời gian: '+ ${feed.data[i].created_time}</span>
-                <img src=" ${feed.data[i].picture}">
-              </div>
-            `;
-            }
-        }
-
-        document.getElementById('feed').innerHTML = output;
-    }
-
-    function setElements(isLoggedIn) {
-        if (isLoggedIn) {
-            document.getElementById('logout').style.display = 'block';
-            document.getElementById('profile').style.display = 'block';
-            document.getElementById('feed').style.display = 'block';
-            document.getElementById('fb-btn').style.display = 'none';
-            document.getElementById('heading').style.display = 'none';
-        } else {
-            document.getElementById('logout').style.display = 'none';
-            document.getElementById('profile').style.display = 'none';
-            document.getElementById('feed').style.display = 'none';
-            document.getElementById('fb-btn').style.display = 'block';
-            document.getElementById('heading').style.display = 'block';
-        }
-    }
-
-    function logout() {
-        FB.logout(function (response) {
-            setElements(false);
-        });
-    }
-</script>
 

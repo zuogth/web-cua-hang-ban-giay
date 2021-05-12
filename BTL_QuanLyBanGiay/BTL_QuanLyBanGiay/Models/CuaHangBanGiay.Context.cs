@@ -31,7 +31,6 @@ namespace BTL_QuanLyBanGiay.Models
         public virtual DbSet<Co> Coes { get; set; }
         public virtual DbSet<CongViec> CongViecs { get; set; }
         public virtual DbSet<DoiTuong> DoiTuongs { get; set; }
-        public virtual DbSet<GioSP> GioSPs { get; set; }
         public virtual DbSet<HoaDonBan> HoaDonBans { get; set; }
         public virtual DbSet<HoaDonNhap> HoaDonNhaps { get; set; }
         public virtual DbSet<Mau> Maus { get; set; }

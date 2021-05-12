@@ -64,8 +64,6 @@ namespace BTL_QuanLyBanGiay.Controllers
                     db.ChiTietHDBs.Add(chiTiet);
                     db.SaveChanges();
                 }
-                Session.Remove("cart");
-                Session.Remove("countCart");
             }
             
 

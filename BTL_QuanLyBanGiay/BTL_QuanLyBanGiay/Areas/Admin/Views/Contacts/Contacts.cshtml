@@ -1,0 +1,85 @@
+﻿@using BTL_QuanLyBanGiay.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Contact>
+
+@{
+    ViewBag.active = 7;
+    ViewBag.Title = "Contacts";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="~/Assest/admin/css/table-admin.css" rel="stylesheet" />
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Mã
+        </th>
+        <th>
+            Họ tên
+        </th>
+        <th>
+            Điện thoại
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Chủ đề
+        </th>
+        <th>
+            Nội dung
+        </th>
+        <th>
+            Comfirm
+        </th>
+        <th></th>
+    </tr>
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @item.MaContact
+            </td>
+            <td>
+                @item.HoTen
+            </td>
+            <td>
+                @item.DienThoai
+            </td>
+            <td>
+                @item.Email
+            </td>
+            <td>
+                @item.Subject
+            </td>
+            <td>
+                @item.NoiDung
+            </td>
+
+            @if (item.Comfirm == 1)
+            {
+                <td>
+                    <i class="fa fa-check" style="color:green;"></i>
+                </td>
+                <td>
+                    <span>Đã phản hồi</span>
+                </td>
+            }
+            else
+            {
+            <td>
+                <i class="fa fa-times" style="color:red;"></i>
+            </td>
+            <td>
+                <a href="@Url.Action("Index","Contacts",new { MaContact=item.MaContact})">Send</a>
+            </td>
+            }
+
+        </tr>
+        }
+    </tbody>
+
+
+</table>

@@ -10,7 +10,7 @@ using BTL_QuanLyBanGiay.Models;
 
 namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
 {
-    public class ChiTietHDBsController : Controller
+    public class ChiTietHDBsController : BaseController
     {
         private CuaHangBanGiayEntities db = new CuaHangBanGiayEntities();
 
@@ -21,21 +21,6 @@ namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
             return PartialView(lst);
         }
 
-        // GET: Admin/ChiTietHDBs/Details/5
-        public ActionResult Details(int id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ChiTietHDB chiTietHDB = db.ChiTietHDBs.Find(id);
-            if (chiTietHDB == null)
-            {
-                return HttpNotFound();
-            }
-            return View(chiTietHDB);
-        }
-
         // GET: Admin/ChiTietHDBs/Create
         public ActionResult Create()
         {
@@ -43,9 +28,7 @@ namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/ChiTietHDBs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SoHDB,MaSP,GiamGia,SoLuong")] ChiTietHDB chiTietHDB)

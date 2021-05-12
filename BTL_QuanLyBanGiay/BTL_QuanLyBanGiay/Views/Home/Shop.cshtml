@@ -48,32 +48,37 @@
             <!-- discounts -->
             <div class="left-side">
                 <h3 class="agileits-sear-head">Discount</h3>
-                <ul>
-                    <li>
-                        <input type="checkbox" class="checked">
-                        <span class="span">5% or More</span>
-                    </li>
-                    <li>
-                        <input type="checkbox" class="checked">
-                        <span class="span">10% or More</span>
-                    </li>
-                    <li>
-                        <input type="checkbox" class="checked">
-                        <span class="span">20% or More</span>
-                    </li>
-                    <li>
-                        <input type="checkbox" class="checked">
-                        <span class="span">30% or More</span>
-                    </li>
-                    <li>
-                        <input type="checkbox" class="checked">
-                        <span class="span">50% or More</span>
-                    </li>
-                    <li>
-                        <input type="checkbox" class="checked">
-                        <span class="span">60% or More</span>
-                    </li>
-                </ul>
+                @if(Session["MaLoai"]!=null)
+            {
+            <ul>
+                <li>
+                    <a href="@Url.Action("Shop","Home",new {MaLoai=Session["MaLoai"],Gia=1000000 })"> < 1,000,000 đ</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Shop","Home",new {MaLoai=Session["MaLoai"],Gia=2000000 })"> < 2,000,000 đ</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Shop","Home",new {MaLoai=Session["MaLoai"],Gia=3000000 })"> < 3,000,000 đ</a>
+                </li>
+
+            </ul>
+                }
+                else
+                {
+            <ul>
+                <li>
+                    <a href="@Url.Action("Shop","Home",new {Gia=1000000 })"> < 1,000,000 đ</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Shop","Home",new {Gia=2000000 })"> < 2,000,000 đ</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Shop","Home",new {Gia=3000000 })"> < 3,000,000 đ</a>
+                </li>
+
+            </ul>
+                }
+                
             </div>
             <!-- //discounts -->
             <!-- deals -->
@@ -111,6 +116,10 @@
         <div class="left-ads-display col-md-9">
             <div class="wrapper_top_shop">
                 <div class="product-sec1">
+                    @if (ViewBag.Err != null)
+                    {
+                        <h4>@ViewBag.Err</h4>
+                    }
                     @{
                         foreach (var item in Model)
                         {

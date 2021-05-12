@@ -19,7 +19,6 @@ namespace BTL_QuanLyBanGiay.Models
         {
             this.ChiTietHDBs = new HashSet<ChiTietHDB>();
             this.ChiTietHDNs = new HashSet<ChiTietHDN>();
-            this.GioSPs = new HashSet<GioSP>();
         }
     
         public string MaSP { get; set; }
@@ -42,8 +41,6 @@ namespace BTL_QuanLyBanGiay.Models
         public virtual ICollection<ChiTietHDN> ChiTietHDNs { get; set; }
         public virtual Co Co { get; set; }
         public virtual DoiTuong DoiTuong { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GioSP> GioSPs { get; set; }
         public virtual Mau Mau { get; set; }
         public virtual NuocSanXuat NuocSanXuat { get; set; }
         public virtual TheLoai TheLoai { get; set; }

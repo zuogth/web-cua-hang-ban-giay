@@ -78,22 +78,25 @@
                 <h3 class="agileits-sear-head">Special Deals</h3>
                 <div class="special-sec1">
                     @{
-                        int y = 0;
-                        foreach (var item in (PagedList.IPagedList<SanPham>)Session["lsp"])
+                        if (Session["lsp"] != null)
                         {
-                            //((List<SanPham>)Session["lsp"]).Add(item);
-                            y++;
-                            <div class="col-xs-4 img-deals">
-                                <img src="@Url.Content("~/images/"+item.Anh)" alt="">
-                            </div>
-                            <div class="col-xs-8 img-deal1">
-                                <h3>@item.TenSP</h3>
-                                @Html.ActionLink(string.Format("{0:0,00}", (Double.Parse(item.DonGiaBan.ToString()))) + "đ", "XemChiTiet", new { MaSP = item.MaSP })
-                            </div>
-                            <div class="clearfix"></div>
-                            if (y == 5)
+                            int y = 0;
+                            foreach (var item in (PagedList.IPagedList<SanPham>)Session["lsp"])
                             {
-                                break;
+                                //((List<SanPham>)Session["lsp"]).Add(item);
+                                y++;
+                                <div class="col-xs-4 img-deals">
+                                    <img src="@Url.Content("~/images/"+item.Anh)" alt="">
+                                </div>
+                                <div class="col-xs-8 img-deal1">
+                                    <h3>@item.TenSP</h3>
+                                    @Html.ActionLink(string.Format("{0:0,00}", (Double.Parse(item.DonGiaBan.ToString()))) + "đ", "XemChiTiet", new { MaSP = item.MaSP })
+                                </div>
+                                <div class="clearfix"></div>
+                                if (y == 5)
+                                {
+                                    break;
+                                }
                             }
                         }
                     }

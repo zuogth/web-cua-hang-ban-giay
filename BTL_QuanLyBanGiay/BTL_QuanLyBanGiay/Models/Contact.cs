@@ -14,10 +14,12 @@ namespace BTL_QuanLyBanGiay.Models
     
     public partial class Contact
     {
+        public int MaContact { get; set; }
         public string DienThoai { get; set; }
         public string HoTen { get; set; }
         public string Email { get; set; }
         public string Subject { get; set; }
         public string NoiDung { get; set; }
+        public Nullable<int> Comfirm { get; set; }
     }
 }

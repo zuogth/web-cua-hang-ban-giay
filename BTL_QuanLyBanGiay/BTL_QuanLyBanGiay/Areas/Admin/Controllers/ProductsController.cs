@@ -9,7 +9,7 @@ using PagedList;
 
 namespace BTL_QuanLyBanGiay.Areas.Admin.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         CuaHangBanGiayEntities db = new CuaHangBanGiayEntities();
         // GET: Admin/Index

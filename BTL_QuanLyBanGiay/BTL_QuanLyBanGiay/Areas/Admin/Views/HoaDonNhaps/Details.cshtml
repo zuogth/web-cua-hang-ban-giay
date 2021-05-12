@@ -4,32 +4,31 @@
     ViewBag.active = 4;
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Session["SoHDN"] = Model.SoHDN;
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>HoaDonNhap</h4>
+    <h4>Hóa đơn nhập</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NgayNhap)
+            Ngày nhập
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NgayNhap)
+            @string.Format("{0:dd/MM/yyyy}",Model.NgayNhap)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TongTien)
+           Tổng tiền
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TongTien)
+            @string.Format("{0:0,00}",Model.TongTien) đ
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NhaCungCap.TenNCC)
+            Tên NCC
         </dt>
 
         <dd>
@@ -37,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NhanVien.TenNV)
+            Tên NV
         </dt>
 
         <dd>
@@ -45,6 +44,7 @@
         </dd>
 
     </dl>
+    @{ Html.RenderAction("Index", "ChiTietHDNs");}
 </div>
 <p>
     <a href="@Url.Action("Index","HoaDonNhaps")" class="btn btn-default"><i class="fa fa-arrow-left"></i>Back</a>

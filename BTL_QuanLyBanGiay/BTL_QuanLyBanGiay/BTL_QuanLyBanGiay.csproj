@@ -144,8 +144,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\ChiTietHDBsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ChiTietHDNsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContactsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HoaDonBansController.cs" />
     <Compile Include="Areas\Admin\Controllers\HoaDonNhapsController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhachHangsController.cs" />
@@ -155,6 +157,7 @@
     <Compile Include="Areas\Admin\Data\LoginModel.cs" />
     <Compile Include="Code\Encryptor.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -205,9 +208,6 @@
     <Compile Include="Models\DoiTuong.cs">
       <DependentUpon>CuaHangBanGiay.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GioSP.cs">
-      <DependentUpon>CuaHangBanGiay.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\HoaDonBan.cs">
       <DependentUpon>CuaHangBanGiay.tt</DependentUpon>
     </Compile>
@@ -241,6 +241,7 @@
     <Content Include="Assest\admin\css\bootstrap-theme.min.css" />
     <Content Include="Assest\admin\css\bootstrap.css" />
     <Content Include="Assest\admin\css\checkbox3.min.css" />
+    <Content Include="Assest\admin\css\contact-cf.css" />
     <Content Include="Assest\admin\css\custom-styles.css" />
     <Content Include="Assest\admin\css\font-awesome.css" />
     <Content Include="Assest\admin\css\pageLogin.css" />
@@ -460,6 +461,11 @@
     <Content Include="Models\CuaHangBanGiay.edmx.diagram">
       <DependentUpon>CuaHangBanGiay.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Contacts\Contacts.cshtml" />
+    <Content Include="Areas\Admin\Views\Contacts\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietHDNs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietHDNs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietHDNs\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -498,12 +504,12 @@
     <Content Include="Views\KhachHang\Edit.cshtml" />
     <Content Include="Views\KhachHang\HisOrder.cshtml" />
     <Content Include="Views\KhachHang\HisProdOrder.cshtml" />
-    <Content Include="Views\KhachHang\DanhGia.cshtml" />
+    <Content Include="Views\Contact\AddContact.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
-    <Folder Include="Areas\Admin\Views\ChiTietHDNs\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Orders\" />
   </ItemGroup>

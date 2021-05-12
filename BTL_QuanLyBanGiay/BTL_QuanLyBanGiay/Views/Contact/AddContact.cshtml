@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "AddContact";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<link href="~/Assest/layout/css/contact.css" rel="stylesheet" />
+<div class="ads-grid_shop">
+    <div class="shop_inner_inf">
+        <h3 class="head">Contact Us</h3>
+        <p class="head_para">Add Some Description</p>
+        <div class="inner_section_w3ls">
+            <div class="col-md-7 contact_grid_right">
+                <h6>Please fill this form to contact with us.</h6>
+                <form id="form-contact">
+                    <div class="col-md-6 col-sm-6 contact_left_grid">
+                        <input class="input-contact" type="text" name="HoTen" id="HoTen" placeholder="Name" required>
+                        <input class="input-contact" type="email" name="Email" id="Email" placeholder="Email" required>
+                    </div>
+                    <div class="col-md-6 col-sm-6 contact_left_grid">
+                        <input class="input-contact" type="text" name="DienThoai" id="DienThoai" placeholder="Telephone" required>
+                        <input class="input-contact" type="text" name="Subject" id="Subject" placeholder="Subject" required>
+                    </div>
+                    <div class="clearfix"> </div>
+                    <textarea class="input-contact" name="NoiDung" id="NoiDung"  required placeholder="Message..."></textarea>
+                    <input class="input-btn" type="submit" value="Submit" onclick="addcontact(this)">
+                    <input class="input-btn" type="reset" value="Clear">
+                </form>
+            </div>
+            <div class="col-md-5 contact-left">
+                <h6>Contact Info</h6>
+                <div class="visit">
+                    <div class="col-md-2 col-sm-2 col-xs-2 contact-icon">
+                        <span class="fa fa-home" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-10 contact-text">
+                        <h4>Visit us</h4>
+                        <p>3 Cau Giay, Ngoc Khanh, Dong Da, Hanoi, Vietnam</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="mail-us">
+                    <div class="col-md-2 col-sm-2 col-xs-2 contact-icon">
+                        <span class="fa fa-envelope" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-10 contact-text">
+                        <h4>Mail us</h4>
+                        <p><a href="mailto:tuanhieu342000@gmail.com">tuanhieu342000@gmail.com</a></p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="call">
+                    <div class="col-md-2 col-sm-2 col-xs-2 contact-icon">
+                        <span class="fa fa-phone" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-10 contact-text">
+                        <h4>Call us</h4>
+                        <p>(+84) 834 633 431</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="visit">
+                    <div class="col-md-2 col-sm-2 col-xs-2 contact-icon">
+                        <span class="fa fa-fax" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-10 contact-text">
+                        <h4>Fax</h4>
+                        <p>(+84) 834 633 431</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+    </div>
+</div>
+<div class="contact-map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.1131158083003!2d105.80123181429781!3d21.028159493176084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab424a50fff9%3A0xbe3a7f3670c0a45f!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBHaWFvIHRow7RuZyBW4bqtbiB04bqjaQ!5e0!3m2!1svi!2s!4v1620744301492!5m2!1svi!2s" allowfullscreen="" loading="lazy" style="border:none;" ></iframe>
+</div>
+<script type="text/javascript">
+    function addcontact(item) {
+        let val = $("#form-contact").serialize();
+        $.ajax({
+            url: "/Contact/AddContact",
+            type: "POST",
+            dataType: "json",
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: val,
+            success: function (data) {
+                alert("Success!");
+            },
+            error: function () {
+                alert("There is some problem");
+            }
+        })
+    }
+</script>
+

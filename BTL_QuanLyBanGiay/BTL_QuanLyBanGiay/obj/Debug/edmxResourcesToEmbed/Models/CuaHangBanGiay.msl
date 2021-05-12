@@ -56,16 +56,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="GioSPs">
-      <EntityTypeMapping TypeName="CuaHangBanGiayModel.GioSP">
-        <MappingFragment StoreEntitySet="GioSP">
-          <ScalarProperty Name="MaGH" ColumnName="MaGH" />
-          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="Gia" ColumnName="Gia" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="HoaDonBans">
       <EntityTypeMapping TypeName="CuaHangBanGiayModel.HoaDonBan">
         <MappingFragment StoreEntitySet="HoaDonBan">
@@ -183,6 +173,19 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="TenKhach" ColumnName="TenKhach" />
           <ScalarProperty Name="MaKhach" ColumnName="MaKhach" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="CuaHangBanGiayModel.Contact">
+        <MappingFragment StoreEntitySet="Contact">
+          <ScalarProperty Name="Comfirm" ColumnName="Comfirm" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+          <ScalarProperty Name="MaContact" ColumnName="MaContact" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

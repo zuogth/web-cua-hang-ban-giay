@@ -19,13 +19,27 @@ namespace BTL_QuanLyBanGiay.Controllers
         {
             return PartialView(db.TheLoais.OrderBy(x=>x.MaLoai).ToList());
         }
-        public ViewResult Shop(int?page,string MaLoai)
+
+        public ViewResult Shop(int?page,string MaLoai,int Gia=0)
         {
             int pageSize;
             int pageNumber;
             List<SanPham> lsp;
             if (MaLoai!=null)
             {
+                Session["MaLoai"] = MaLoai;
+                if(Gia>0)
+                {
+                    pageSize = 6;
+                    pageNumber = (page ?? 1);
+                    lsp = db.SanPhams.Where(x => x.MaLoai == MaLoai && x.DonGiaBan<=Gia).OrderBy(x => x.MaSP).ToList();
+                    lsp = lsp.GroupBy(x => x.TenSP).Select(grb => grb.First()).ToList();
+                    if (lsp.Count == 0)
+                    {
+                        ViewBag.Err = "Khong co san pham nao";
+                    }
+                    return View(lsp.ToPagedList(pageNumber, pageSize));
+                }    
                 pageSize = 6;
                 pageNumber = (page ?? 1);
                 lsp = db.SanPhams.Where(x => x.MaLoai == MaLoai).OrderBy(x => x.MaSP).ToList();
@@ -35,6 +49,22 @@ namespace BTL_QuanLyBanGiay.Controllers
                     ViewBag.Err = "Khong co san pham nao";
                 }
                 return View(lsp.ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                if (Gia >0)
+                {
+                    Session["GiaSP"] = Gia;
+                    pageSize = 6;
+                    pageNumber = (page ?? 1);
+                    lsp = db.SanPhams.Where(x => x.DonGiaBan <= Gia).OrderBy(x => x.MaSP).ToList();
+                    lsp = lsp.GroupBy(x => x.TenSP).Select(grb => grb.First()).ToList();
+                    if (lsp.Count == 0)
+                    {
+                        ViewBag.Err = "Khong co san pham nao";
+                    }
+                    return View(lsp.ToPagedList(pageNumber, pageSize));
+                }
             }
             pageSize = 6;
             pageNumber = (page ?? 1);
@@ -46,6 +76,8 @@ namespace BTL_QuanLyBanGiay.Controllers
             }                 
             return View(lsp.ToPagedList(pageNumber,pageSize));
         }
+        
+
         public ViewResult XemChiTiet(string MaSP="SP07")
         {
             SanPham sp = db.SanPhams.SingleOrDefault(x => x.MaSP == MaSP);
@@ -79,6 +111,10 @@ namespace BTL_QuanLyBanGiay.Controllers
                 ViewBag.Err = "Không có đánh giá nào";
             }
             return PartialView(ldg);
+        }
+        public ActionResult About()
+        {
+            return View();
         }
     }
 }

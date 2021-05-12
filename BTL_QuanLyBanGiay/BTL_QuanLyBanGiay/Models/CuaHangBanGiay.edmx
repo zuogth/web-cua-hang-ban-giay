@@ -61,13 +61,15 @@
         </EntityType>
         <EntityType Name="Contact">
           <Key>
-            <PropertyRef Name="DienThoai" />
+            <PropertyRef Name="MaContact" />
           </Key>
+          <Property Name="MaContact" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DienThoai" Type="nchar" MaxLength="15" Nullable="false" />
           <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Subject" Type="nvarchar" MaxLength="50" />
           <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
+          <Property Name="Comfirm" Type="int" />
         </EntityType>
         <EntityType Name="DanhGia">
           <Key>
@@ -86,16 +88,6 @@
           </Key>
           <Property Name="MaDoiTuong" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TenDoiTuong" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="GioSP">
-          <Key>
-            <PropertyRef Name="MaGH" />
-            <PropertyRef Name="MaSP" />
-          </Key>
-          <Property Name="MaGH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaSP" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="SoLuong" Type="int" />
-          <Property Name="Gia" Type="money" />
         </EntityType>
         <EntityType Name="HoaDonBan">
           <Key>
@@ -247,18 +239,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GioSP_SanPham">
-          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-          <End Role="GioSP" Type="Self.GioSP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SanPham">
-              <PropertyRef Name="MaSP" />
-            </Principal>
-            <Dependent Role="GioSP">
-              <PropertyRef Name="MaSP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_HoaDonNhap_NhaCungCap">
           <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="1" />
           <End Role="HoaDonNhap" Type="Self.HoaDonNhap" Multiplicity="*" />
@@ -389,7 +369,6 @@
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DoiTuong" EntityType="Self.DoiTuong" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GioSP" EntityType="Self.GioSP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoaDonBan" EntityType="Self.HoaDonBan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoaDonNhap" EntityType="Self.HoaDonNhap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
@@ -418,10 +397,6 @@
           <AssociationSet Name="FK_DanhGia_KhachHang" Association="Self.FK_DanhGia_KhachHang">
             <End Role="KhachHang" EntitySet="KhachHang" />
             <End Role="DanhGia" EntitySet="DanhGia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GioSP_SanPham" Association="Self.FK_GioSP_SanPham">
-            <End Role="SanPham" EntitySet="SanPham" />
-            <End Role="GioSP" EntitySet="GioSP" />
           </AssociationSet>
           <AssociationSet Name="FK_HoaDonNhap_NhaCungCap" Association="Self.FK_HoaDonNhap_NhaCungCap">
             <End Role="NhaCungCap" EntitySet="NhaCungCap" />
@@ -527,17 +502,6 @@
           <Property Name="TenDoiTuong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="SanPhams" Relationship="Self.FK_SanPham_DoiTuong" FromRole="DoiTuong" ToRole="SanPham" />
         </EntityType>
-        <EntityType Name="GioSP">
-          <Key>
-            <PropertyRef Name="MaGH" />
-            <PropertyRef Name="MaSP" />
-          </Key>
-          <Property Name="MaGH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaSP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SoLuong" Type="Int32" />
-          <Property Name="Gia" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="SanPham" Relationship="Self.FK_GioSP_SanPham" FromRole="GioSP" ToRole="SanPham" />
-        </EntityType>
         <EntityType Name="HoaDonBan">
           <Key>
             <PropertyRef Name="SoHDB" />
@@ -623,7 +587,6 @@
           <NavigationProperty Name="ChiTietHDNs" Relationship="Self.FK_ChiTietHDN_SanPham" FromRole="SanPham" ToRole="ChiTietHDN" />
           <NavigationProperty Name="Co" Relationship="Self.FK_SanPham_Co" FromRole="SanPham" ToRole="Co" />
           <NavigationProperty Name="DoiTuong" Relationship="Self.FK_SanPham_DoiTuong" FromRole="SanPham" ToRole="DoiTuong" />
-          <NavigationProperty Name="GioSPs" Relationship="Self.FK_GioSP_SanPham" FromRole="SanPham" ToRole="GioSP" />
           <NavigationProperty Name="Mau" Relationship="Self.FK_SanPham_Mau" FromRole="SanPham" ToRole="Mau" />
           <NavigationProperty Name="NuocSanXuat" Relationship="Self.FK_SanPham_NuocSanXuat" FromRole="SanPham" ToRole="NuocSanXuat" />
           <NavigationProperty Name="TheLoai" Relationship="Self.FK_SanPham_TheLoai" FromRole="SanPham" ToRole="TheLoai" />
@@ -732,18 +695,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GioSP_SanPham">
-          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-          <End Role="GioSP" Type="Self.GioSP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SanPham">
-              <PropertyRef Name="MaSP" />
-            </Principal>
-            <Dependent Role="GioSP">
-              <PropertyRef Name="MaSP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_HoaDonNhap_NhaCungCap">
           <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="1" />
           <End Role="HoaDonNhap" Type="Self.HoaDonNhap" Multiplicity="*" />
@@ -811,7 +762,6 @@
           <EntitySet Name="Coes" EntityType="Self.Co" />
           <EntitySet Name="CongViecs" EntityType="Self.CongViec" />
           <EntitySet Name="DoiTuongs" EntityType="Self.DoiTuong" />
-          <EntitySet Name="GioSPs" EntityType="Self.GioSP" />
           <EntitySet Name="HoaDonBans" EntityType="Self.HoaDonBan" />
           <EntitySet Name="HoaDonNhaps" EntityType="Self.HoaDonNhap" />
           <EntitySet Name="Maus" EntityType="Self.Mau" />
@@ -851,10 +801,6 @@
           <AssociationSet Name="FK_SanPham_DoiTuong" Association="Self.FK_SanPham_DoiTuong">
             <End Role="DoiTuong" EntitySet="DoiTuongs" />
             <End Role="SanPham" EntitySet="SanPhams" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GioSP_SanPham" Association="Self.FK_GioSP_SanPham">
-            <End Role="SanPham" EntitySet="SanPhams" />
-            <End Role="GioSP" EntitySet="GioSPs" />
           </AssociationSet>
           <AssociationSet Name="FK_HoaDonNhap_NhaCungCap" Association="Self.FK_HoaDonNhap_NhaCungCap">
             <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
@@ -951,13 +897,15 @@
         </Association>
         <EntityType Name="Contact">
           <Key>
-            <PropertyRef Name="DienThoai" />
+            <PropertyRef Name="MaContact" />
           </Key>
+          <Property Name="MaContact" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DienThoai" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Comfirm" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1017,16 +965,6 @@
               <MappingFragment StoreEntitySet="DoiTuong">
                 <ScalarProperty Name="MaDoiTuong" ColumnName="MaDoiTuong" />
                 <ScalarProperty Name="TenDoiTuong" ColumnName="TenDoiTuong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GioSPs">
-            <EntityTypeMapping TypeName="CuaHangBanGiayModel.GioSP">
-              <MappingFragment StoreEntitySet="GioSP">
-                <ScalarProperty Name="MaGH" ColumnName="MaGH" />
-                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-                <ScalarProperty Name="Gia" ColumnName="Gia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1153,11 +1091,13 @@
           <EntitySetMapping Name="Contacts">
             <EntityTypeMapping TypeName="CuaHangBanGiayModel.Contact">
               <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="Comfirm" ColumnName="Comfirm" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
                 <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="MaContact" ColumnName="MaContact" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
